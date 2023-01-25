@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.Set;
 
-@Entity()
+@Entity
 @Component
 @Scope("prototype")
 @Table(name = "news")
@@ -20,16 +20,16 @@ public class NewsModel implements BaseEntity<Long> {
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
-    @Column(name = "title")
+    @Column(name = "title", unique = true, nullable = false)
     private String title;
 
-    @Column(name = "content")
+    @Column(name = "content", unique = true, nullable = false)
     private String content;
 
-    @Column(name = "createDate")
+    @Column(name = "create_date")
     private LocalDateTime createDate;
 
-    @Column(name = "updateDate")
+    @Column(name = "update_date")
     private LocalDateTime lastUpdateDate;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

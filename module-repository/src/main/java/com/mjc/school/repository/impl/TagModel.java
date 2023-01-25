@@ -19,7 +19,7 @@ public class TagModel implements BaseEntity<Long> {
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "tagModelSet")

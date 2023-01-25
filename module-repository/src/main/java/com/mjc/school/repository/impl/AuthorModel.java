@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
-@Entity()
+@Entity
 @Component
 @Scope("prototype")
 @Table(name = "author")
@@ -20,13 +20,13 @@ public class AuthorModel implements BaseEntity<Long> {
     @Column(name = "id", updatable = false, nullable = false)
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
 
-    @Column(name = "createDate")
+    @Column(name = "create_date")
     private LocalDateTime createDate;
 
-    @Column(name = "updateDate")
+    @Column(name = "update_date")
     private LocalDateTime lastUpdateDate;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "author")

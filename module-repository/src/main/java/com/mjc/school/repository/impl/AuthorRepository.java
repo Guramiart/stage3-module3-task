@@ -11,35 +11,35 @@ import java.util.Optional;
 
 @Repository
 @Transactional
-public class NewsRepository implements BaseRepository<NewsModel, Long> {
+public class AuthorRepository implements BaseRepository<AuthorModel, Long> {
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @Override
-    public List<NewsModel> readAll() {
-        return entityManager.createQuery("SELECT n FROM NewsModel n", NewsModel.class).getResultList();
+    public List<AuthorModel> readAll() {
+        return entityManager.createQuery("SELECT a FROM AuthorModel a", AuthorModel.class).getResultList();
     }
 
     @Override
-    public Optional<NewsModel> readById(Long id) {
-        return Optional.of(entityManager.find(NewsModel.class, id));
+    public Optional<AuthorModel> readById(Long id) {
+        return Optional.of(entityManager.find(AuthorModel.class, id));
     }
 
     @Override
-    public NewsModel create(NewsModel entity) {
+    public AuthorModel create(AuthorModel entity) {
         entityManager.persist(entity);
         return entity;
     }
 
     @Override
-    public NewsModel update(NewsModel entity) {
+    public AuthorModel update(AuthorModel entity) {
         return entityManager.merge(entity);
     }
 
     @Override
     public boolean deleteById(Long id) {
-        Optional<NewsModel> authorModel = readById(id);
+        Optional<AuthorModel> authorModel = readById(id);
         authorModel.ifPresent(model -> entityManager.remove(model));
         return existById(id);
     }
