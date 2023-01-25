@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity()
-@Component("news")
+@Component
 @Scope("prototype")
 @Table(name = "news")
 public class NewsModel implements BaseEntity<Long> {
@@ -26,15 +26,15 @@ public class NewsModel implements BaseEntity<Long> {
     @Column(name = "content")
     private String content;
 
-    @Column(name = "create")
+    @Column(name = "createDate")
     private LocalDateTime createDate;
 
-    @Column(name = "update")
+    @Column(name = "updateDate")
     private LocalDateTime lastUpdateDate;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "author_id")
-    private AuthorModel authorModel;
+    private AuthorModel author;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "news_tag",
@@ -87,11 +87,11 @@ public class NewsModel implements BaseEntity<Long> {
     }
 
     public AuthorModel getAuthorModel() {
-        return authorModel;
+        return author;
     }
 
     public void setAuthorModel(AuthorModel authorModel) {
-        this.authorModel = authorModel;
+        this.author = authorModel;
     }
 
     @Override
@@ -104,17 +104,17 @@ public class NewsModel implements BaseEntity<Long> {
                 && Objects.equals(content, newsModel.content)
                 && Objects.equals(createDate, newsModel.createDate)
                 && Objects.equals(lastUpdateDate, newsModel.lastUpdateDate)
-                && Objects.equals(authorModel, newsModel.authorModel);
+                && Objects.equals(author, newsModel.author);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, content, createDate, lastUpdateDate, authorModel);
+        return Objects.hash(id, title, content, createDate, lastUpdateDate, author);
     }
 
     @Override
     public String toString() {
         return String.format("%s[id=%d, title=%s, content=%s, createDate=%s, updateDate=%s, authorId=%d]",
-                getClass().getSimpleName(), id, title, content, createDate, lastUpdateDate, authorModel.getId());
+                getClass().getSimpleName(), id, title, content, createDate, lastUpdateDate, author.getId());
     }
 }

@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Component("tag")
+@Component
 @Scope("prototype")
 @Table(name = "tag")
 public class TagModel implements BaseEntity<Long> {
