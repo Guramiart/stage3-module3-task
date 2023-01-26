@@ -23,10 +23,10 @@ public class AuthorModel implements BaseEntity<Long> {
     @Column(name = "name", unique = true, nullable = false)
     private String name;
 
-    @Column(name = "create_date")
+    @Column(name = "create_date", nullable = false)
     private LocalDateTime createDate;
 
-    @Column(name = "update_date")
+    @Column(name = "update_date", nullable = false)
     private LocalDateTime lastUpdateDate;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "author")

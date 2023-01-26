@@ -26,10 +26,10 @@ public class NewsModel implements BaseEntity<Long> {
     @Column(name = "content", unique = true, nullable = false)
     private String content;
 
-    @Column(name = "create_date")
+    @Column(name = "create_date", nullable = false)
     private LocalDateTime createDate;
 
-    @Column(name = "update_date")
+    @Column(name = "update_date", nullable = false)
     private LocalDateTime lastUpdateDate;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
