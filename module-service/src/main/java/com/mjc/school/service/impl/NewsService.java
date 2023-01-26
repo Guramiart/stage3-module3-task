@@ -3,8 +3,10 @@ package com.mjc.school.service.impl;
 import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.repository.impl.NewsModel;
 import com.mjc.school.service.BaseService;
-import com.mjc.school.service.dto.NewsDtoRequest;
-import com.mjc.school.service.dto.NewsDtoResponse;
+import com.mjc.school.service.annotation.NotEmpty;
+import com.mjc.school.service.annotation.Valid;
+import com.mjc.school.service.dto.impl.NewsDtoRequest;
+import com.mjc.school.service.dto.impl.NewsDtoResponse;
 import com.mjc.school.service.exceptions.ErrorCode;
 import com.mjc.school.service.exceptions.ServiceException;
 import com.mjc.school.service.mapper.NewsMapper;
@@ -34,6 +36,7 @@ public class NewsService implements BaseService<NewsDtoRequest, NewsDtoResponse,
     }
 
     @Override
+    @NotEmpty
     public NewsDtoResponse readById(Long id) {
         Optional<NewsModel> newsModel = repository.readById(id);
         if(newsModel.isEmpty()) {
@@ -44,12 +47,14 @@ public class NewsService implements BaseService<NewsDtoRequest, NewsDtoResponse,
     }
 
     @Override
+    @Valid
     public NewsDtoResponse create(NewsDtoRequest createRequest) {
         NewsModel newsModel = repository.create(NewsMapper.INSTANCE.newsDtoToNews(createRequest));
         return NewsMapper.INSTANCE.newsToNewsDto(newsModel);
     }
 
     @Override
+    @Valid
     public NewsDtoResponse update(NewsDtoRequest updateRequest) {
         if(!repository.existById(updateRequest.getId())) {
             throw new ServiceException(String.format(
@@ -61,6 +66,7 @@ public class NewsService implements BaseService<NewsDtoRequest, NewsDtoResponse,
     }
 
     @Override
+    @NotEmpty
     public boolean deleteById(Long id) {
         if(!repository.existById(id)) {
             throw new ServiceException(String.format(

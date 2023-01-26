@@ -1,22 +1,19 @@
-package com.mjc.school.service.dto;
+package com.mjc.school.service.dto.impl;
 
-import com.mjc.school.repository.impl.NewsModel;
+import com.mjc.school.service.dto.BaseDto;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Objects;
 
 @Component
 @Scope("prototype")
-public class AuthorDtoRequest implements BaseDto<Long> {
+public class TagDtoRequest implements BaseDto<Long> {
 
     private Long id;
     private String name;
 
-    private List<NewsModel> newsModelList;
-
-    public AuthorDtoRequest() {}
+    public TagDtoRequest() {}
 
     public Long getId() {
         return id;
@@ -34,19 +31,11 @@ public class AuthorDtoRequest implements BaseDto<Long> {
         this.name = name;
     }
 
-    public List<NewsModel> getNewsModelList() {
-        return newsModelList;
-    }
-
-    public void setNewsModelList(List<NewsModel> newsModelList) {
-        this.newsModelList = newsModelList;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AuthorDtoRequest that = (AuthorDtoRequest) o;
+        TagDtoRequest that = (TagDtoRequest) o;
         return Objects.equals(id, that.id) && Objects.equals(name, that.name);
     }
 

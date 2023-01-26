@@ -1,7 +1,7 @@
 package com.mjc.school.service.builder;
 
 import com.mjc.school.service.Builder;
-import com.mjc.school.service.dto.TagDtoRequest;
+import com.mjc.school.service.dto.impl.TagDtoRequest;
 
 public class TagRequestBuilder implements Builder<TagDtoRequest> {
 

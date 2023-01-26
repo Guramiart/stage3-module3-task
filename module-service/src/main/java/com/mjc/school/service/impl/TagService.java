@@ -3,8 +3,10 @@ package com.mjc.school.service.impl;
 import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.repository.impl.TagModel;
 import com.mjc.school.service.BaseService;
-import com.mjc.school.service.dto.TagDtoRequest;
-import com.mjc.school.service.dto.TagDtoResponse;
+import com.mjc.school.service.annotation.NotEmpty;
+import com.mjc.school.service.annotation.Valid;
+import com.mjc.school.service.dto.impl.TagDtoRequest;
+import com.mjc.school.service.dto.impl.TagDtoResponse;
 import com.mjc.school.service.exceptions.ErrorCode;
 import com.mjc.school.service.exceptions.ServiceException;
 import com.mjc.school.service.mapper.TagMapper;
@@ -34,6 +36,7 @@ public class TagService implements BaseService<TagDtoRequest, TagDtoResponse, Lo
     }
 
     @Override
+    @NotEmpty
     public TagDtoResponse readById(Long id) {
         Optional<TagModel> tagModel = repository.readById(id);
         if(tagModel.isEmpty()) {
@@ -44,12 +47,14 @@ public class TagService implements BaseService<TagDtoRequest, TagDtoResponse, Lo
     }
 
     @Override
+    @Valid
     public TagDtoResponse create(TagDtoRequest createRequest) {
         TagModel tagModel = repository.create(TagMapper.INSTANCE.tagDtoToTag(createRequest));
         return TagMapper.INSTANCE.tagToTagDto(tagModel);
     }
 
     @Override
+    @Valid
     public TagDtoResponse update(TagDtoRequest updateRequest) {
         if(!repository.existById(updateRequest.getId())) {
             throw new ServiceException(String.format(
@@ -61,6 +66,7 @@ public class TagService implements BaseService<TagDtoRequest, TagDtoResponse, Lo
     }
 
     @Override
+    @NotEmpty
     public boolean deleteById(Long id) {
         if(!repository.existById(id)) {
             throw new ServiceException(String.format(

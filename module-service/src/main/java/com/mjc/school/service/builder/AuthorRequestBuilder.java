@@ -2,7 +2,7 @@ package com.mjc.school.service.builder;
 
 import com.mjc.school.repository.impl.NewsModel;
 import com.mjc.school.service.Builder;
-import com.mjc.school.service.dto.AuthorDtoRequest;
+import com.mjc.school.service.dto.impl.AuthorDtoRequest;
 
 import java.util.List;
 

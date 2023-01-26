@@ -1,4 +1,6 @@
-package com.mjc.school.service.dto;
+package com.mjc.school.service.dto.impl;
+
+import com.mjc.school.service.dto.BaseDto;
 
 import java.time.LocalDateTime;
 import java.util.Objects;

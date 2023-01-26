@@ -3,8 +3,10 @@ package com.mjc.school.service.impl;
 import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.repository.impl.AuthorModel;
 import com.mjc.school.service.BaseService;
-import com.mjc.school.service.dto.AuthorDtoRequest;
-import com.mjc.school.service.dto.AuthorDtoResponse;
+import com.mjc.school.service.annotation.NotEmpty;
+import com.mjc.school.service.annotation.Valid;
+import com.mjc.school.service.dto.impl.AuthorDtoRequest;
+import com.mjc.school.service.dto.impl.AuthorDtoResponse;
 import com.mjc.school.service.exceptions.ErrorCode;
 import com.mjc.school.service.exceptions.ServiceException;
 import com.mjc.school.service.mapper.AuthorMapper;
@@ -34,6 +36,7 @@ public class AuthorService implements BaseService<AuthorDtoRequest, AuthorDtoRes
     }
 
     @Override
+    @NotEmpty
     public AuthorDtoResponse readById(Long id) {
         Optional<AuthorModel> authorModel = repository.readById(id);
         if(authorModel.isEmpty()) {
@@ -44,12 +47,14 @@ public class AuthorService implements BaseService<AuthorDtoRequest, AuthorDtoRes
     }
 
     @Override
+    @Valid
     public AuthorDtoResponse create(AuthorDtoRequest createRequest) {
         AuthorModel authorModel = repository.create(AuthorMapper.INSTANCE.authorDtoToAuthor(createRequest));
         return AuthorMapper.INSTANCE.authorToAuthorDto(authorModel);
     }
 
     @Override
+    @Valid
     public AuthorDtoResponse update(AuthorDtoRequest updateRequest) {
         if(!repository.existById(updateRequest.getId())) {
             throw new ServiceException(String.format(
@@ -61,6 +66,7 @@ public class AuthorService implements BaseService<AuthorDtoRequest, AuthorDtoRes
     }
 
     @Override
+    @NotEmpty
     public boolean deleteById(Long id) {
         if(!repository.existById(id)) {
             throw new ServiceException(String.format(

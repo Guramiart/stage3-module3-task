@@ -2,7 +2,7 @@ package com.mjc.school.service.builder;
 
 import com.mjc.school.repository.impl.AuthorModel;
 import com.mjc.school.service.Builder;
-import com.mjc.school.service.dto.NewsDtoRequest;
+import com.mjc.school.service.dto.impl.NewsDtoRequest;
 
 public class NewsRequestBuilder implements Builder<NewsDtoRequest> {
 

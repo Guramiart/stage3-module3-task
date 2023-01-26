@@ -1,5 +1,6 @@
-package com.mjc.school.service.dto;
+package com.mjc.school.service.dto.impl;
 
+import com.mjc.school.service.dto.BaseDto;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;

@@ -1,8 +1,8 @@
 package com.mjc.school.service.mapper;
 
 import com.mjc.school.repository.impl.NewsModel;
-import com.mjc.school.service.dto.NewsDtoRequest;
-import com.mjc.school.service.dto.NewsDtoResponse;
+import com.mjc.school.service.dto.impl.NewsDtoRequest;
+import com.mjc.school.service.dto.impl.NewsDtoResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
