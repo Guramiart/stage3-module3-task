@@ -1,6 +1,5 @@
 package com.mjc.school.service.dto.impl;
 
-import com.mjc.school.repository.impl.NewsModel;
 import com.mjc.school.service.dto.BaseDto;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -15,7 +14,7 @@ public class AuthorDtoRequest implements BaseDto<Long> {
     private Long id;
     private String name;
 
-    private List<NewsModel> newsModelList;
+    private List<NewsDtoRequest> newsList;
 
     public AuthorDtoRequest() {}
 
@@ -35,12 +34,12 @@ public class AuthorDtoRequest implements BaseDto<Long> {
         this.name = name;
     }
 
-    public List<NewsModel> getNewsModelList() {
-        return newsModelList;
+    public List<NewsDtoRequest> getNewsList() {
+        return newsList;
     }
 
-    public void setNewsModelList(List<NewsModel> newsModelList) {
-        this.newsModelList = newsModelList;
+    public void setNewsModelList(List<NewsDtoRequest> newsList) {
+        this.newsList = newsList;
     }
 
     @Override

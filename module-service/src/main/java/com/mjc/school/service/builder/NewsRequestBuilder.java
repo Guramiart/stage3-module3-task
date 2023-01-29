@@ -1,7 +1,7 @@
 package com.mjc.school.service.builder;
 
-import com.mjc.school.repository.impl.AuthorModel;
 import com.mjc.school.service.Builder;
+import com.mjc.school.service.dto.impl.AuthorDtoRequest;
 import com.mjc.school.service.dto.impl.NewsDtoRequest;
 
 public class NewsRequestBuilder implements Builder<NewsDtoRequest> {
@@ -27,7 +27,7 @@ public class NewsRequestBuilder implements Builder<NewsDtoRequest> {
         return this;
     }
 
-    public NewsRequestBuilder setAuthor(AuthorModel author) {
+    public NewsRequestBuilder setAuthor(AuthorDtoRequest author) {
         newsDtoRequest.setAuthor(author);
         return this;
     }

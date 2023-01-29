@@ -1,8 +1,8 @@
 package com.mjc.school.service.builder;
 
-import com.mjc.school.repository.impl.NewsModel;
 import com.mjc.school.service.Builder;
 import com.mjc.school.service.dto.impl.AuthorDtoRequest;
+import com.mjc.school.service.dto.impl.NewsDtoRequest;
 
 import java.util.List;
 
@@ -24,8 +24,8 @@ public class AuthorRequestBuilder implements Builder<AuthorDtoRequest> {
         return this;
     }
 
-    public AuthorRequestBuilder setNewsList(List<NewsModel> newsModelList) {
-        authorDtoRequest.setNewsModelList(newsModelList);
+    public AuthorRequestBuilder setNewsList(List<NewsDtoRequest> newsList) {
+        authorDtoRequest.setNewsModelList(newsList);
         return this;
     }
 
