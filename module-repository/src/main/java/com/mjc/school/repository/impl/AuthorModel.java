@@ -2,7 +2,12 @@ package com.mjc.school.repository.impl;
 
 import com.mjc.school.repository.model.BaseEntity;
 import jakarta.persistence.*;
+import org.hibernate.annotations.Type;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Scope;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -10,6 +15,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Component
 @Scope("prototype")
 @Table(name = "author")
@@ -24,9 +30,11 @@ public class AuthorModel implements BaseEntity<Long> {
     private String name;
 
     @Column(name = "create_date", nullable = false)
+    @CreatedDate
     private LocalDateTime createDate;
 
     @Column(name = "update_date", nullable = false)
+    @LastModifiedDate
     private LocalDateTime lastUpdateDate;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "author")

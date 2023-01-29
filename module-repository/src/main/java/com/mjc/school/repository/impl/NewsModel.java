@@ -3,6 +3,9 @@ package com.mjc.school.repository.impl;
 import com.mjc.school.repository.model.BaseEntity;
 import jakarta.persistence.*;
 import org.springframework.context.annotation.Scope;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -10,6 +13,7 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Component
 @Scope("prototype")
 @Table(name = "news")
@@ -27,9 +31,11 @@ public class NewsModel implements BaseEntity<Long> {
     private String content;
 
     @Column(name = "create_date", nullable = false)
+    @CreatedDate
     private LocalDateTime createDate;
 
     @Column(name = "update_date", nullable = false)
+    @LastModifiedDate
     private LocalDateTime lastUpdateDate;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
