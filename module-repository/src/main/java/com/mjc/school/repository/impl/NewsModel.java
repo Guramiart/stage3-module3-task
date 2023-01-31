@@ -30,7 +30,7 @@ public class NewsModel implements BaseEntity<Long> {
     @Column(name = "content", unique = true, nullable = false)
     private String content;
 
-    @Column(name = "create_date", nullable = false)
+    @Column(name = "create_date", nullable = false, updatable = false)
     @CreatedDate
     private LocalDateTime createDate;
 

@@ -124,14 +124,14 @@ public class CommandFactory {
     public Command getCommand(Scanner sc) {
         Command command = new ErrorCommand();
         int id = Integer.parseInt(sc.nextLine());
-        if(id >= 0 && id <= 10) {
+        if(id >= 0 && id <= 12) {
             Operation operation = Arrays.stream(Operation.values())
                     .filter(e -> id == e.id)
                     .findFirst()
                     .get();
-            if(id % 2 != 0 && id % 3 != 0) {
+            if(id % 3 == 1) {
                 command = operation.getCommand(sc, newsController);
-            } else if (id % 3 != 0){
+            } else if (id % 3 == 2){
                 command = operation.getCommand(sc, authorController);
             } else {
                 command = operation.getCommand(sc, tagController);
