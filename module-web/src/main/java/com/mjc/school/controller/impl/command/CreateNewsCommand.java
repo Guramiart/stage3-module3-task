@@ -37,6 +37,7 @@ public class CreateNewsCommand implements Command {
                 NewsDtoRequest newsDtoRequest = new NewsRequestBuilder()
                         .setTitle(title)
                         .setContent(content)
+                        .setAuthor(authorId)
                         .build();
                 controller.create(newsDtoRequest);
                 isValid = true;

@@ -101,7 +101,49 @@ public class CommandFactory {
         UPDATE_TAG(12, "Update tag") {
             @Override
             <T> Command getCommand(Scanner sc, T controller) {
+                return new UpdateTagCommand((TagController) controller, sc);
+            }
+        },
+        DELETE_NEWS(13, "Delete news") {
+            @Override
+            <T> Command getCommand(Scanner sc, T controller) {
+                return new DeleteNewsCommand((NewsController) controller, sc);
+            }
+        },
+        DELETE_AUTHOR(14, "Delete author") {
+            @Override
+            <T> Command getCommand(Scanner sc, T controller) {
+                return new DeleteAuthorCommand((AuthorController) controller, sc);
+            }
+        },
+        DELETE_TAG(15, "Delete tag") {
+            @Override
+            <T> Command getCommand(Scanner sc, T controller) {
+                return new DeleteTagCommand((TagController) controller, sc);
+            }
+        },
+        GET_AUTHOR_BY_NEWS(16, "Get author by news id") {
+            @Override
+            <T> Command getCommand(Scanner sc, T controller) {
                 return null;
+            }
+        },
+        GET_TAG_BY_NEWS(17, "Get tag by news") {
+            @Override
+            <T> Command getCommand(Scanner sc, T controller) {
+                return null;
+            }
+        },
+        GET_NEWS_BY_PARAM(18, "Get news by provided param") {
+            @Override
+            <T> Command getCommand(Scanner sc, T controller) {
+                return null;
+            }
+        },
+        EXIT(0, "Exit") {
+            @Override
+            <T> Command getCommand(Scanner sc, T controller) {
+                return new ExitCommand();
             }
         };
 
