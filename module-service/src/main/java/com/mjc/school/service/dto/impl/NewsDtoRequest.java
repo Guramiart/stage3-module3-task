@@ -13,7 +13,7 @@ public class NewsDtoRequest implements BaseDto<Long> {
     private Long id;
     private String title;
     private String content;
-    private AuthorDtoRequest author;
+    private Long authorId;
 
     public NewsDtoRequest() {}
 
@@ -41,12 +41,12 @@ public class NewsDtoRequest implements BaseDto<Long> {
         this.content = content;
     }
 
-    public AuthorDtoRequest getAuthor() {
-        return author;
+    public Long getAuthorId() {
+        return authorId;
     }
 
-    public void setAuthor(AuthorDtoRequest author) {
-        this.author = author;
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
     }
 
     @Override
@@ -57,17 +57,17 @@ public class NewsDtoRequest implements BaseDto<Long> {
         return Objects.equals(id, that.id)
                 && Objects.equals(title, that.title)
                 && Objects.equals(content, that.content)
-                && Objects.equals(author.getId(), that.author.getId());
+                && Objects.equals(authorId, that.authorId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, content, author.getId());
+        return Objects.hash(id, title, content, authorId);
     }
 
     @Override
     public String toString() {
         return String.format("%s[id=%d, title=%s, content=%s, authorId=%d]",
-                getClass().getSimpleName(), id, title, content, author.getId());
+                getClass().getSimpleName(), id, title, content, authorId);
     }
 }

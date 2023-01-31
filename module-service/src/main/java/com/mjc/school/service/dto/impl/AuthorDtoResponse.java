@@ -11,8 +11,8 @@ public class AuthorDtoResponse implements BaseDto<Long> {
 
     private Long id;
     private String name;
-    private LocalDateTime createTime;
-    private LocalDateTime lastUpdateTime;
+    private LocalDateTime createDate;
+    private LocalDateTime lastUpdateDate;
 
     public AuthorDtoResponse() {}
 
@@ -32,20 +32,20 @@ public class AuthorDtoResponse implements BaseDto<Long> {
         this.name = name;
     }
 
-    public LocalDateTime getCreateTime() {
-        return createTime;
+    public LocalDateTime getCreateDate() {
+        return createDate;
     }
 
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
+    public void setCreateDate(LocalDateTime createDate) {
+        this.createDate = createDate;
     }
 
-    public LocalDateTime getLastUpdateTime() {
-        return lastUpdateTime;
+    public LocalDateTime getLastUpdateDate() {
+        return lastUpdateDate;
     }
 
-    public void setLastUpdateTime(LocalDateTime lastUpdateTime) {
-        this.lastUpdateTime = lastUpdateTime;
+    public void setLastUpdateDate(LocalDateTime lastUpdateDate) {
+        this.lastUpdateDate = lastUpdateDate;
     }
 
     @Override
@@ -55,18 +55,18 @@ public class AuthorDtoResponse implements BaseDto<Long> {
         AuthorDtoResponse that = (AuthorDtoResponse) o;
         return Objects.equals(id, that.id)
                 && Objects.equals(name, that.name)
-                && Objects.equals(createTime, that.createTime)
-                && Objects.equals(lastUpdateTime, that.lastUpdateTime);
+                && Objects.equals(createDate, that.createDate)
+                && Objects.equals(lastUpdateDate, that.lastUpdateDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, createTime, lastUpdateTime);
+        return Objects.hash(id, name, createDate, lastUpdateDate);
     }
 
     @Override
     public String toString() {
         return String.format("%s[id=%d, name=%s, createDate=%s, updateDate=%s]",
-                getClass().getSimpleName(), id, name, createTime, lastUpdateTime);
+                getClass().getSimpleName(), id, name, createDate, lastUpdateDate);
     }
 }

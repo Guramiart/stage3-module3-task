@@ -38,9 +38,9 @@ public class NewsModel implements BaseEntity<Long> {
     @LastModifiedDate
     private LocalDateTime lastUpdateDate;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "author_id")
-    private AuthorModel author;
+    private AuthorModel authorModel;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "news_tag",
@@ -93,11 +93,11 @@ public class NewsModel implements BaseEntity<Long> {
     }
 
     public AuthorModel getAuthorModel() {
-        return author;
+        return authorModel;
     }
 
     public void setAuthorModel(AuthorModel authorModel) {
-        this.author = authorModel;
+        this.authorModel = authorModel;
     }
 
     @Override
@@ -110,17 +110,17 @@ public class NewsModel implements BaseEntity<Long> {
                 && Objects.equals(content, newsModel.content)
                 && Objects.equals(createDate, newsModel.createDate)
                 && Objects.equals(lastUpdateDate, newsModel.lastUpdateDate)
-                && Objects.equals(author, newsModel.author);
+                && Objects.equals(authorModel, newsModel.authorModel);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, content, createDate, lastUpdateDate, author);
+        return Objects.hash(id, title, content, createDate, lastUpdateDate, authorModel);
     }
 
     @Override
     public String toString() {
         return String.format("%s[id=%d, title=%s, content=%s, createDate=%s, updateDate=%s, authorId=%d]",
-                getClass().getSimpleName(), id, title, content, createDate, lastUpdateDate, author.getId());
+                getClass().getSimpleName(), id, title, content, createDate, lastUpdateDate, authorModel.getId());
     }
 }

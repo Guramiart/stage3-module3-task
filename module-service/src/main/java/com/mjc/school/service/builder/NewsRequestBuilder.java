@@ -27,8 +27,8 @@ public class NewsRequestBuilder implements Builder<NewsDtoRequest> {
         return this;
     }
 
-    public NewsRequestBuilder setAuthor(AuthorDtoRequest author) {
-        newsDtoRequest.setAuthor(author);
+    public NewsRequestBuilder setAuthorId(Long authorId) {
+        newsDtoRequest.setAuthorId(authorId);
         return this;
     }
 

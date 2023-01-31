@@ -35,7 +35,7 @@ public class AuthorModel implements BaseEntity<Long> {
     @LastModifiedDate
     private LocalDateTime lastUpdateDate;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "author")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "authorModel", cascade = CascadeType.REMOVE)
     private List<NewsModel> newsModelList;
 
     public AuthorModel() {}
