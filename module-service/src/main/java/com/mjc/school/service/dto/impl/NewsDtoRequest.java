@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
+import java.util.Set;
 
 @Component
 @Scope("prototype")
@@ -13,6 +14,7 @@ public class NewsDtoRequest implements BaseDto<Long> {
     private Long id;
     private String title;
     private String content;
+    private Set<Long> tagId;
     private Long authorId;
 
     public NewsDtoRequest() {}
@@ -41,6 +43,14 @@ public class NewsDtoRequest implements BaseDto<Long> {
         this.content = content;
     }
 
+    public Set<Long> getTagId() {
+        return tagId;
+    }
+
+    public void setTagId(Set<Long> tagId) {
+        this.tagId = tagId;
+    }
+
     public Long getAuthorId() {
         return authorId;
     }
@@ -57,12 +67,13 @@ public class NewsDtoRequest implements BaseDto<Long> {
         return Objects.equals(id, that.id)
                 && Objects.equals(title, that.title)
                 && Objects.equals(content, that.content)
+                && Objects.equals(tagId, that.tagId)
                 && Objects.equals(authorId, that.authorId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, content, authorId);
+        return Objects.hash(id, title, content, tagId, authorId);
     }
 
     @Override

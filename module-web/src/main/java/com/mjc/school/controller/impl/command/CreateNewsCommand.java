@@ -10,6 +10,7 @@ import com.mjc.school.service.dto.impl.NewsDtoResponse;
 import com.mjc.school.service.exceptions.ServiceException;
 
 import java.util.Scanner;
+import java.util.Set;
 
 public class CreateNewsCommand implements Command {
 
@@ -34,9 +35,12 @@ public class CreateNewsCommand implements Command {
                 String content = sc.nextLine();
                 System.out.println(Constants.AUTHOR_ID_RESP);
                 Long authorId = ScannerUtils.getNumberFromScanner("News", sc);
+                System.out.println(Constants.TAG_IDS_RESP);
+                Set<Long> tagIdSet = ScannerUtils.getSetNumberFromScanner("News", sc);
                 NewsDtoRequest newsDtoRequest = new NewsRequestBuilder()
                         .setTitle(title)
                         .setContent(content)
+                        .setTagId(tagIdSet)
                         .setAuthorId(authorId)
                         .build();
                 controller.create(newsDtoRequest);

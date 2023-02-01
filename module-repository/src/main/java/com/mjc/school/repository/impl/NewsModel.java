@@ -100,6 +100,14 @@ public class NewsModel implements BaseEntity<Long> {
         this.authorModel = authorModel;
     }
 
+    public Set<TagModel> getTagModelSet() {
+        return tagModelSet;
+    }
+
+    public void setTagModelSet(Set<TagModel> tagModelSet) {
+        this.tagModelSet = tagModelSet;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

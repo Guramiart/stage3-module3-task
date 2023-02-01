@@ -2,8 +2,10 @@ package com.mjc.school.controller.impl;
 
 import com.mjc.school.controller.BaseController;
 import com.mjc.school.service.BaseService;
+import com.mjc.school.service.dto.impl.AuthorDtoResponse;
 import com.mjc.school.service.dto.impl.NewsDtoRequest;
 import com.mjc.school.service.dto.impl.NewsDtoResponse;
+import com.mjc.school.service.impl.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -42,5 +44,9 @@ public class NewsController implements BaseController<NewsDtoRequest, NewsDtoRes
     @Override
     public boolean deleteById(Long id) {
         return service.deleteById(id);
+    }
+
+    public AuthorDtoResponse readAuthorByNewsId(Long id) {
+        return ((NewsService) service).readAuthorByNewsId(id);
     }
 }

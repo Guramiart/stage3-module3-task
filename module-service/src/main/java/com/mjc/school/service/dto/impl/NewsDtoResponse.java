@@ -4,6 +4,7 @@ import com.mjc.school.service.dto.BaseDto;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.Set;
 
 public class NewsDtoResponse implements BaseDto<Long> {
 
@@ -13,6 +14,8 @@ public class NewsDtoResponse implements BaseDto<Long> {
     private LocalDateTime createDate;
     private LocalDateTime lastUpdateDate;
     private Long authorId;
+
+    private Set<Long> tagId;
 
     public NewsDtoResponse() {}
 
@@ -62,6 +65,14 @@ public class NewsDtoResponse implements BaseDto<Long> {
 
     public void setAuthorId(Long authorId) {
         this.authorId = authorId;
+    }
+
+    public Set<Long> getTagId() {
+        return tagId;
+    }
+
+    public void setTagId(Set<Long> tagId) {
+        this.tagId = tagId;
     }
 
     @Override

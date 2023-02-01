@@ -125,13 +125,13 @@ public class CommandFactory {
         GET_AUTHOR_BY_NEWS(16, "Get author by news id") {
             @Override
             <T> Command getCommand(Scanner sc, T controller) {
-                return null;
+                return new ReadAuthorByNewsIdCommand((NewsController) controller, sc);
             }
         },
-        GET_TAG_BY_NEWS(17, "Get tag by news id") {
+        GET_TAG_BY_NEWS(17, "Get tags by news id") {
             @Override
             <T> Command getCommand(Scanner sc, T controller) {
-                return null;
+                return new ReadTagsByNewsIdCommand((NewsController) controller, sc);
             }
         },
         GET_NEWS_BY_PARAM(18, "Get news by provided params") {
@@ -166,11 +166,11 @@ public class CommandFactory {
     public Command getCommand(Scanner sc) {
         Command command = new ErrorCommand();
         int id = Integer.parseInt(sc.nextLine());
-        if(id >= 0 && id <= 18) {
-            Operation operation = Arrays.stream(Operation.values())
-                    .filter(e -> id == e.id)
-                    .findFirst()
-                    .get();
+        Operation operation = Arrays.stream(Operation.values())
+                .filter(e -> id == e.id)
+                .findFirst()
+                .get();
+        if(id >= 0 && id <= 15) {
             if(id % 3 == 1) {
                 command = operation.getCommand(sc, newsController);
             } else if (id % 3 == 2){
@@ -178,6 +178,8 @@ public class CommandFactory {
             } else {
                 command = operation.getCommand(sc, tagController);
             }
+        } else if (id > 15 && id <= 18) {
+            command = operation.getCommand(sc, newsController);
         }
         return command;
     }

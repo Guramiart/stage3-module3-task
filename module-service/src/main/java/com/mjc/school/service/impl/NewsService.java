@@ -6,16 +6,20 @@ import com.mjc.school.repository.impl.NewsModel;
 import com.mjc.school.service.BaseService;
 import com.mjc.school.service.annotation.NotEmpty;
 import com.mjc.school.service.annotation.Valid;
+import com.mjc.school.service.dto.impl.AuthorDtoResponse;
 import com.mjc.school.service.dto.impl.NewsDtoRequest;
 import com.mjc.school.service.dto.impl.NewsDtoResponse;
+import com.mjc.school.service.dto.impl.TagDtoResponse;
 import com.mjc.school.service.exceptions.ErrorCode;
 import com.mjc.school.service.exceptions.ServiceException;
+import com.mjc.school.service.mapper.AuthorMapper;
 import com.mjc.school.service.mapper.NewsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class NewsService implements BaseService<NewsDtoRequest, NewsDtoResponse, Long> {
@@ -87,5 +91,16 @@ public class NewsService implements BaseService<NewsDtoRequest, NewsDtoResponse,
                     ErrorCode.NOT_EXIST.getErrorMessage(), NEWS_PARAM, id));
         }
         return newsRepository.deleteById(id);
+    }
+
+    @NotEmpty
+    public AuthorDtoResponse readAuthorByNewsId(Long id) {
+        AuthorModel authorModel = newsRepository.readById(id).get().getAuthorModel();
+        return AuthorMapper.INSTANCE.authorToAuthorDto(authorModel);
+    }
+
+    public Set<TagDtoResponse> readTagsByNewsId(Long id) {
+
+        return null;
     }
 }

@@ -4,6 +4,8 @@ import com.mjc.school.service.Builder;
 import com.mjc.school.service.dto.impl.AuthorDtoRequest;
 import com.mjc.school.service.dto.impl.NewsDtoRequest;
 
+import java.util.Set;
+
 public class NewsRequestBuilder implements Builder<NewsDtoRequest> {
 
     private final NewsDtoRequest newsDtoRequest;
@@ -24,6 +26,11 @@ public class NewsRequestBuilder implements Builder<NewsDtoRequest> {
 
     public NewsRequestBuilder setContent(String content) {
         newsDtoRequest.setContent(content);
+        return this;
+    }
+
+    public NewsRequestBuilder setTagId(Set<Long> tagId) {
+        newsDtoRequest.setTagId(tagId);
         return this;
     }
 
