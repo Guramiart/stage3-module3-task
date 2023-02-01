@@ -15,8 +15,6 @@ public class NewsDtoResponse implements BaseDto<Long> {
     private LocalDateTime lastUpdateDate;
     private Long authorId;
 
-    private Set<Long> tagId;
-
     public NewsDtoResponse() {}
 
     public Long getId() {
@@ -65,14 +63,6 @@ public class NewsDtoResponse implements BaseDto<Long> {
 
     public void setAuthorId(Long authorId) {
         this.authorId = authorId;
-    }
-
-    public Set<Long> getTagId() {
-        return tagId;
-    }
-
-    public void setTagId(Set<Long> tagId) {
-        this.tagId = tagId;
     }
 
     @Override

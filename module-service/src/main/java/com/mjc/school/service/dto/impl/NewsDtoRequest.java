@@ -14,8 +14,8 @@ public class NewsDtoRequest implements BaseDto<Long> {
     private Long id;
     private String title;
     private String content;
-    private Set<Long> tagId;
     private Long authorId;
+    private Set<Long> tagId;
 
     public NewsDtoRequest() {}
 
@@ -43,20 +43,20 @@ public class NewsDtoRequest implements BaseDto<Long> {
         this.content = content;
     }
 
-    public Set<Long> getTagId() {
-        return tagId;
-    }
-
-    public void setTagId(Set<Long> tagId) {
-        this.tagId = tagId;
-    }
-
     public Long getAuthorId() {
         return authorId;
     }
 
     public void setAuthorId(Long authorId) {
         this.authorId = authorId;
+    }
+
+    public Set<Long> getTagId() {
+        return tagId;
+    }
+
+    public void setTagId(Set<Long> tagId) {
+        this.tagId = tagId;
     }
 
     @Override

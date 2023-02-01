@@ -5,11 +5,13 @@ import com.mjc.school.service.BaseService;
 import com.mjc.school.service.dto.impl.AuthorDtoResponse;
 import com.mjc.school.service.dto.impl.NewsDtoRequest;
 import com.mjc.school.service.dto.impl.NewsDtoResponse;
+import com.mjc.school.service.dto.impl.TagDtoResponse;
 import com.mjc.school.service.impl.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class NewsController implements BaseController<NewsDtoRequest, NewsDtoResponse, Long> {
@@ -48,5 +50,9 @@ public class NewsController implements BaseController<NewsDtoRequest, NewsDtoRes
 
     public AuthorDtoResponse readAuthorByNewsId(Long id) {
         return ((NewsService) service).readAuthorByNewsId(id);
+    }
+
+    public Set<TagDtoResponse> readTagsByNewsId(Long id) {
+        return ((NewsService) service).readTagsByNewsId(id);
     }
 }

@@ -3,12 +3,14 @@ package com.mjc.school.repository.impl;
 import com.mjc.school.repository.BaseRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
-import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Repository
 @Transactional
@@ -52,5 +54,13 @@ public class NewsRepository implements BaseRepository<NewsModel, Long> {
     @Override
     public boolean existById(Long id) {
         return readById(id).isPresent();
+    }
+
+    public Set<TagModel> getTagsByNewsId(Long id) {
+        TypedQuery<NewsModel> query = entityManager.createQuery(
+                "SELECT n FROM NewsModel n INNER JOIN FETCH n.tagModelSet t WHERE n.id = :id", NewsModel.class);
+        query.setParameter("id", id);
+        NewsModel model = (NewsModel) query.getResultList().get(0);
+        return model.getTagModelSet();
     }
 }

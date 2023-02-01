@@ -3,6 +3,8 @@ package com.mjc.school.service.impl;
 import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.repository.impl.AuthorModel;
 import com.mjc.school.repository.impl.NewsModel;
+import com.mjc.school.repository.impl.NewsRepository;
+import com.mjc.school.repository.impl.TagModel;
 import com.mjc.school.service.BaseService;
 import com.mjc.school.service.annotation.NotEmpty;
 import com.mjc.school.service.annotation.Valid;
@@ -14,12 +16,14 @@ import com.mjc.school.service.exceptions.ErrorCode;
 import com.mjc.school.service.exceptions.ServiceException;
 import com.mjc.school.service.mapper.AuthorMapper;
 import com.mjc.school.service.mapper.NewsMapper;
+import com.mjc.school.service.mapper.TagMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class NewsService implements BaseService<NewsDtoRequest, NewsDtoResponse, Long> {
@@ -28,12 +32,15 @@ public class NewsService implements BaseService<NewsDtoRequest, NewsDtoResponse,
     private static final String AUTHOR_PARAM = "Author";
     private final BaseRepository<NewsModel, Long> newsRepository;
     private final BaseRepository<AuthorModel, Long> authorRepository;
+    private final BaseRepository<TagModel, Long> tagRepository;
 
     @Autowired
     public NewsService(BaseRepository<NewsModel, Long> newsRepository,
-                       BaseRepository<AuthorModel, Long> authorRepository) {
+                       BaseRepository<AuthorModel, Long> authorRepository,
+                       BaseRepository<TagModel, Long> tagRepository) {
         this.newsRepository = newsRepository;
         this.authorRepository = authorRepository;
+        this.tagRepository = tagRepository;
     }
 
     @Override
@@ -99,8 +106,15 @@ public class NewsService implements BaseService<NewsDtoRequest, NewsDtoResponse,
         return AuthorMapper.INSTANCE.authorToAuthorDto(authorModel);
     }
 
+    @NotEmpty
     public Set<TagDtoResponse> readTagsByNewsId(Long id) {
-
-        return null;
+        if(!newsRepository.existById(id)) {
+            throw new ServiceException(String.format(
+                    ErrorCode.NOT_EXIST.getErrorMessage(), NEWS_PARAM, id));
+        }
+        return ((NewsRepository)newsRepository).getTagsByNewsId(id)
+                .stream()
+                .map(TagMapper.INSTANCE::tagToTagDto)
+                .collect(Collectors.toSet());
     }
 }

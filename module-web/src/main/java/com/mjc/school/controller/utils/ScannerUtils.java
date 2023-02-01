@@ -24,9 +24,12 @@ public class ScannerUtils {
 
     public static Set<Long> getSetNumberFromScanner(String param, Scanner sc) {
         try {
-            String[] idStr = sc.nextLine().split(",");
-            Set<Long> ids = Arrays.stream(idStr).map(Long::parseLong).collect(Collectors.toSet());
-            sc.nextLine();
+            Set<Long> ids = new HashSet<>();
+            String str = sc.nextLine();
+            if(!("".equals(str))) {
+                String[] idStr = str.split(",");
+                ids = Arrays.stream(idStr).map(Long::parseLong).collect(Collectors.toSet());
+            }
             return ids;
         } catch (InputMismatchException e) {
             sc.nextLine();
