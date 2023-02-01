@@ -128,13 +128,13 @@ public class CommandFactory {
                 return null;
             }
         },
-        GET_TAG_BY_NEWS(17, "Get tag by news") {
+        GET_TAG_BY_NEWS(17, "Get tag by news id") {
             @Override
             <T> Command getCommand(Scanner sc, T controller) {
                 return null;
             }
         },
-        GET_NEWS_BY_PARAM(18, "Get news by provided param") {
+        GET_NEWS_BY_PARAM(18, "Get news by provided params") {
             @Override
             <T> Command getCommand(Scanner sc, T controller) {
                 return null;
@@ -166,7 +166,7 @@ public class CommandFactory {
     public Command getCommand(Scanner sc) {
         Command command = new ErrorCommand();
         int id = Integer.parseInt(sc.nextLine());
-        if(id >= 0 && id <= 12) {
+        if(id >= 0 && id <= 18) {
             Operation operation = Arrays.stream(Operation.values())
                     .filter(e -> id == e.id)
                     .findFirst()

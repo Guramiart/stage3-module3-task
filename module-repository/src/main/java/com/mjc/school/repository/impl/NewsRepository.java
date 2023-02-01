@@ -4,6 +4,7 @@ import com.mjc.school.repository.BaseRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
+import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class NewsRepository implements BaseRepository<NewsModel, Long> {
 
     @Override
     public Optional<NewsModel> readById(Long id) {
-        return Optional.of(entityManager.find(NewsModel.class, id));
+        return Optional.ofNullable(entityManager.find(NewsModel.class, id));
     }
 
     @Override
@@ -34,14 +35,18 @@ public class NewsRepository implements BaseRepository<NewsModel, Long> {
 
     @Override
     public NewsModel update(NewsModel entity) {
-        return entityManager.merge(entity);
+        NewsModel model = entityManager.getReference(NewsModel.class, entity.getId());
+        model.setTitle(entity.getTitle());
+        model.setContent(entity.getContent());
+        model.setAuthorModel(entity.getAuthorModel());
+        return model;
     }
 
     @Override
     public boolean deleteById(Long id) {
         Optional<NewsModel> authorModel = readById(id);
         authorModel.ifPresent(model -> entityManager.remove(model));
-        return existById(id);
+        return !existById(id);
     }
 
     @Override

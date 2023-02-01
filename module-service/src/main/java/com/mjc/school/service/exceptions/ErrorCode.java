@@ -6,7 +6,7 @@ public enum ErrorCode {
     NOT_NUMBER("0201", "%s id should be a number"),
     NON_POSITIVE("0202", "%s id can't be null or less than 1. %s id is: %d"),
     NULL_CONTENT("0301", "%s can't be null. %s is null"),
-    WRONG_LENGTH("0302", "News %s can't be less than %d and more than %d symbols. News %s is: %s");
+    WRONG_LENGTH("0302", "%s can't be less than %d and more than %d symbols. %s is: %s");
 
     private final String code;
     private final String message;

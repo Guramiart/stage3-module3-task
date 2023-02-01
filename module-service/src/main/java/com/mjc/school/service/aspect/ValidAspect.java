@@ -33,12 +33,12 @@ public class ValidAspect {
             "&& args(dto)")
     private <T extends BaseDto<Long>> void validateDto(T dto) {
         if(dto instanceof NewsDtoRequest request) {
-            Validator.validateString(request.getTitle(), TITLE_PARAM, MIN_TITLE_LENGTH, MAX_TITLE_LENGTH);
-            Validator.validateString(request.getContent(), CONTENT_PARAM, MIN_CONTENT_LENGTH, MAX_CONTENT_LENGTH);
+            Validator.validateString(request.getTitle(), NEWS_PARAM + " " + TITLE_PARAM, MIN_TITLE_LENGTH, MAX_TITLE_LENGTH);
+            Validator.validateString(request.getContent(), NEWS_PARAM + " " + CONTENT_PARAM, MIN_CONTENT_LENGTH, MAX_CONTENT_LENGTH);
         } else if(dto instanceof AuthorDtoRequest request) {
-            Validator.validateString(request.getName(), NAME_PARAM, MIN_NAME_LENGTH, MAX_NAME_LENGTH);
+            Validator.validateString(request.getName(), AUTHOR_PARAM, MIN_NAME_LENGTH, MAX_NAME_LENGTH);
         } else if(dto instanceof TagDtoRequest request) {
-            Validator.validateString(request.getName(), NAME_PARAM, MIN_NAME_LENGTH, MIN_NAME_LENGTH);
+            Validator.validateString(request.getName(), TAG_PARAM, MIN_NAME_LENGTH, MAX_NAME_LENGTH);
         }
     }
 }

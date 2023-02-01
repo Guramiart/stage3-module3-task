@@ -23,7 +23,7 @@ public class AuthorRepository implements BaseRepository<AuthorModel, Long> {
 
     @Override
     public Optional<AuthorModel> readById(Long id) {
-        return Optional.of(entityManager.find(AuthorModel.class, id));
+        return Optional.ofNullable(entityManager.find(AuthorModel.class, id));
     }
 
     @Override
@@ -34,14 +34,16 @@ public class AuthorRepository implements BaseRepository<AuthorModel, Long> {
 
     @Override
     public AuthorModel update(AuthorModel entity) {
-        return entityManager.merge(entity);
+        AuthorModel model = entityManager.getReference(AuthorModel.class, entity.getId());
+        model.setName(entity.getName());
+        return model;
     }
 
     @Override
     public boolean deleteById(Long id) {
         Optional<AuthorModel> authorModel = readById(id);
         authorModel.ifPresent(model -> entityManager.remove(model));
-        return existById(id);
+        return !existById(id);
     }
 
     @Override

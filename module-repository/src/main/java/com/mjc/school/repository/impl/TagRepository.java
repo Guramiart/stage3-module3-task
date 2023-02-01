@@ -23,7 +23,7 @@ public class TagRepository implements BaseRepository<TagModel, Long> {
 
     @Override
     public Optional<TagModel> readById(Long id) {
-        return Optional.of(entityManager.find(TagModel.class, id));
+        return Optional.ofNullable(entityManager.find(TagModel.class, id));
     }
 
     @Override

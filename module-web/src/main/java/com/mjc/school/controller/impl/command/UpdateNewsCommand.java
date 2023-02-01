@@ -40,6 +40,7 @@ public class UpdateNewsCommand implements Command {
                         .setId(newsId)
                         .setTitle(title)
                         .setContent(content)
+                        .setAuthorId(authorId)
                         .build();
                 System.out.println(controller.update(newsDtoRequest));
                 isValid = true;
