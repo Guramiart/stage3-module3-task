@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
+import java.util.Set;
 
 @Component
 @Scope("prototype")
@@ -12,6 +13,7 @@ public class TagDtoRequest implements BaseDto<Long> {
 
     private Long id;
     private String name;
+    private Set<Long> tagId;
 
     public TagDtoRequest() {}
 
@@ -29,6 +31,13 @@ public class TagDtoRequest implements BaseDto<Long> {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Long> getTagId() {
+        return tagId;
+    }
+    public void setTagId(Set<Long> tagId) {
+        this.tagId = tagId;
     }
 
     @Override

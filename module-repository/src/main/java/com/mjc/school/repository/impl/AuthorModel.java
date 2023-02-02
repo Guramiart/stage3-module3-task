@@ -2,8 +2,6 @@ package com.mjc.school.repository.impl;
 
 import com.mjc.school.repository.model.BaseEntity;
 import jakarta.persistence.*;
-import org.hibernate.annotations.Type;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -29,7 +27,7 @@ public class AuthorModel implements BaseEntity<Long> {
     @Column(name = "name", unique = true, nullable = false)
     private String name;
 
-    @Column(name = "create_date", nullable = false)
+    @Column(name = "create_date", nullable = false, updatable = false)
     @CreatedDate
     private LocalDateTime createDate;
 
@@ -37,7 +35,7 @@ public class AuthorModel implements BaseEntity<Long> {
     @LastModifiedDate
     private LocalDateTime lastUpdateDate;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "author")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "authorModel", cascade = CascadeType.REMOVE)
     private List<NewsModel> newsModelList;
 
     public AuthorModel() {}

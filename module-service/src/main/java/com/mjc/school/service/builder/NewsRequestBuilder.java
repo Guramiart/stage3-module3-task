@@ -1,8 +1,9 @@
 package com.mjc.school.service.builder;
 
 import com.mjc.school.service.Builder;
-import com.mjc.school.service.dto.impl.AuthorDtoRequest;
 import com.mjc.school.service.dto.impl.NewsDtoRequest;
+
+import java.util.Set;
 
 public class NewsRequestBuilder implements Builder<NewsDtoRequest> {
 
@@ -27,8 +28,13 @@ public class NewsRequestBuilder implements Builder<NewsDtoRequest> {
         return this;
     }
 
-    public NewsRequestBuilder setAuthor(AuthorDtoRequest author) {
-        newsDtoRequest.setAuthor(author);
+    public NewsRequestBuilder setTagId(Set<Long> tagId) {
+        newsDtoRequest.setTagId(tagId);
+        return this;
+    }
+
+    public NewsRequestBuilder setAuthorId(Long authorId) {
+        newsDtoRequest.setAuthorId(authorId);
         return this;
     }
 

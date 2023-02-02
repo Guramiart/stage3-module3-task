@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
+import java.util.Set;
 
 @Component
 @Scope("prototype")
@@ -13,7 +14,8 @@ public class NewsDtoRequest implements BaseDto<Long> {
     private Long id;
     private String title;
     private String content;
-    private AuthorDtoRequest author;
+    private Long authorId;
+    private Set<Long> tagId;
 
     public NewsDtoRequest() {}
 
@@ -41,12 +43,20 @@ public class NewsDtoRequest implements BaseDto<Long> {
         this.content = content;
     }
 
-    public AuthorDtoRequest getAuthor() {
-        return author;
+    public Long getAuthorId() {
+        return authorId;
     }
 
-    public void setAuthor(AuthorDtoRequest author) {
-        this.author = author;
+    public void setAuthorId(Long authorId) {
+        this.authorId = authorId;
+    }
+
+    public Set<Long> getTagId() {
+        return tagId;
+    }
+
+    public void setTagId(Set<Long> tagId) {
+        this.tagId = tagId;
     }
 
     @Override
@@ -57,17 +67,18 @@ public class NewsDtoRequest implements BaseDto<Long> {
         return Objects.equals(id, that.id)
                 && Objects.equals(title, that.title)
                 && Objects.equals(content, that.content)
-                && Objects.equals(author.getId(), that.author.getId());
+                && Objects.equals(tagId, that.tagId)
+                && Objects.equals(authorId, that.authorId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, content, author.getId());
+        return Objects.hash(id, title, content, tagId, authorId);
     }
 
     @Override
     public String toString() {
         return String.format("%s[id=%d, title=%s, content=%s, authorId=%d]",
-                getClass().getSimpleName(), id, title, content, author.getId());
+                getClass().getSimpleName(), id, title, content, authorId);
     }
 }
