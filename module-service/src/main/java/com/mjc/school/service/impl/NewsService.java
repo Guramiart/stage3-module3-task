@@ -117,4 +117,11 @@ public class NewsService implements BaseService<NewsDtoRequest, NewsDtoResponse,
                 .map(TagMapper.INSTANCE::tagToTagDto)
                 .collect(Collectors.toSet());
     }
+
+    public List<NewsDtoResponse> readNewsByParam(Object ...params) {
+        return ((NewsRepository) newsRepository).readNewsByParam(params)
+                .stream()
+                .map(NewsMapper.INSTANCE::newsToNewsDto)
+                .collect(Collectors.toList());
+    }
 }

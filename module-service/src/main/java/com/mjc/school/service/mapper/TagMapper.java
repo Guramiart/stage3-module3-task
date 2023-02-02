@@ -4,6 +4,7 @@ import com.mjc.school.repository.impl.TagModel;
 import com.mjc.school.service.dto.impl.TagDtoRequest;
 import com.mjc.school.service.dto.impl.TagDtoResponse;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
@@ -14,6 +15,7 @@ public interface TagMapper {
 
     TagDtoResponse tagToTagDto(TagModel tagModel);
 
+    @Mapping(target = "newsModelSet", ignore = true)
     TagModel tagDtoToTag(TagDtoRequest tagDtoRequest);
     
 }

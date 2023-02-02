@@ -55,4 +55,8 @@ public class NewsController implements BaseController<NewsDtoRequest, NewsDtoRes
     public Set<TagDtoResponse> readTagsByNewsId(Long id) {
         return ((NewsService) service).readTagsByNewsId(id);
     }
+
+    public List<NewsDtoResponse> readNewsByParams(Object ... params) {
+        return ((NewsService) service).readNewsByParam(params);
+    }
 }

@@ -13,8 +13,9 @@ public class Constants {
     public static final String AUTHOR_NAME_RESP = "Enter author name:";
 
     public static final String TAG_ID_RESP = "Enter tag id:";
-
-    public static final String TAG_IDS_RESP = "Enter tag ids separated by commas:";
     public static final String TAG_NAME_RESP = "Enter tag name:";
+
+    public static final String TAG_NAMES_RESP = "Enter tag names separated by commas:";
+    public static final String TAG_IDS_RESP = "Enter tag ids separated by commas:";
 
 }

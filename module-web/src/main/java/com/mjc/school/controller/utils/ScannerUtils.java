@@ -37,4 +37,20 @@ public class ScannerUtils {
                     ErrorCode.NOT_NUMBER.getErrorMessage(), param));
         }
     }
+
+    public static Set<String> getSetStringFromScanner(String param, Scanner sc) {
+        try {
+            Set<String> stringSet = new HashSet<>();
+            String str = sc.nextLine();
+            if(!("".equals(str))) {
+                String[] params = str.split(",");
+                stringSet = Arrays.stream(params).collect(Collectors.toSet());
+            }
+            return stringSet;
+        } catch (InputMismatchException e) {
+            sc.nextLine();
+            throw new ArgumentNotValidException(String.format(
+                    ErrorCode.NOT_NUMBER.getErrorMessage(), param));
+        }
+    }
 }

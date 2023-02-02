@@ -137,7 +137,7 @@ public class CommandFactory {
         GET_NEWS_BY_PARAM(18, "Get news by provided params") {
             @Override
             <T> Command getCommand(Scanner sc, T controller) {
-                return null;
+                return new ReadNewsByParamCommand((NewsController) controller, sc);
             }
         },
         EXIT(0, "Exit") {
