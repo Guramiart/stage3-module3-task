@@ -4,7 +4,6 @@ import com.mjc.school.service.dto.BaseDto;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
-import java.util.Set;
 
 public class NewsDtoResponse implements BaseDto<Long> {
 

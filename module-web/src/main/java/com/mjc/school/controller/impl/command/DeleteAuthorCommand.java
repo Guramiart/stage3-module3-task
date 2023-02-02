@@ -6,8 +6,6 @@ import com.mjc.school.controller.constants.Constants;
 import com.mjc.school.controller.utils.ScannerUtils;
 import com.mjc.school.service.dto.impl.AuthorDtoRequest;
 import com.mjc.school.service.dto.impl.AuthorDtoResponse;
-import com.mjc.school.service.dto.impl.NewsDtoRequest;
-import com.mjc.school.service.dto.impl.NewsDtoResponse;
 import com.mjc.school.service.exceptions.ServiceException;
 
 import java.util.Scanner;

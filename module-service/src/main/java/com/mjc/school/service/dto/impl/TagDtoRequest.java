@@ -1,6 +1,5 @@
 package com.mjc.school.service.dto.impl;
 
-import com.mjc.school.repository.impl.NewsModel;
 import com.mjc.school.service.dto.BaseDto;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

@@ -3,15 +3,12 @@ package com.mjc.school.repository.impl;
 import com.mjc.school.repository.BaseRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.*;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Repository
 @Transactional
@@ -71,10 +68,19 @@ public class NewsRepository implements BaseRepository<NewsModel, Long> {
         Root<NewsModel> root = query.from(NewsModel.class);
         root.join("authorModel", JoinType.INNER);
         root.fetch("authorModel", JoinType.INNER);
-        root.join("tagModelSet", JoinType.INNER);
+        Join<NewsModel, TagModel> newsModelTagModelJoin = root.join("tagModelSet", JoinType.INNER);
         root.fetch("tagModelSet", JoinType.INNER);
 
+        List<NewsModel> results = new ArrayList<>();
         List<Predicate> predicates = new ArrayList<>();
+        Set<?> tagNames = (Set<?>) params[0];
+        Set<?> tagIds = (Set<?>) params[1];
+        if(tagNames.size() != 0) {
+            predicates.add(criteriaBuilder.and(newsModelTagModelJoin.get("name").in(List.of(tagNames))));
+        }
+        if(tagIds.size() != 0) {
+            predicates.add(criteriaBuilder.and(newsModelTagModelJoin.get("id").in(List.of(tagIds))));
+        }
         if(!("".equals(params[2]))) {
             predicates.add(criteriaBuilder.equal(root.get("authorModel").get("name"), params[2]));
         }
@@ -84,8 +90,10 @@ public class NewsRepository implements BaseRepository<NewsModel, Long> {
         if(!("".equals(params[4]))) {
             predicates.add(criteriaBuilder.equal(root.get("content"), params[4]));
         }
-        query.select(root).where(predicates.toArray(new Predicate[]{}));
-
-        return entityManager.createQuery(query).getResultList();
+        if(predicates.size() != 0) {
+            query.select(root).where(predicates.toArray(new Predicate[]{}));
+            results = entityManager.createQuery(query).getResultList();
+        }
+        return results;
     }
 }

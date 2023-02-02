@@ -1,7 +1,6 @@
 package com.mjc.school.service.builder;
 
 import com.mjc.school.service.Builder;
-import com.mjc.school.service.dto.impl.AuthorDtoRequest;
 import com.mjc.school.service.dto.impl.NewsDtoRequest;
 
 import java.util.Set;

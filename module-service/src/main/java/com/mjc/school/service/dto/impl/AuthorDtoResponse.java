@@ -1,7 +1,6 @@
 package com.mjc.school.service.dto.impl;
 
 import com.mjc.school.service.dto.BaseDto;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
