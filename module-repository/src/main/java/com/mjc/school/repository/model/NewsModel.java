@@ -47,7 +47,59 @@ public class NewsModel implements BaseEntity<Long> {
             inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private Set<TagModel> tagModelSet;
 
+    private static class NewsBuilder {
+
+        private final Long id;
+        private final String title;
+        private final String content;
+        private LocalDateTime createDate;
+        private LocalDateTime lastUpdateDate;
+        private AuthorModel authorModel;
+        private Set<TagModel> tagModelSet;
+
+        public NewsBuilder(Long id, String title, String content) {
+            this.id = id;
+            this.title = title;
+            this.content = content;
+        }
+
+        public NewsBuilder createDate(LocalDateTime value) {
+            createDate = value;
+            return this;
+        }
+
+        public NewsBuilder lastUpdateDate(LocalDateTime value) {
+            lastUpdateDate = value;
+            return this;
+        }
+
+        public NewsBuilder authorModel(AuthorModel value) {
+            authorModel = value;
+            return this;
+        }
+
+        public NewsBuilder tagModelSet(Set<TagModel> set) {
+            tagModelSet = set;
+            return this;
+        }
+
+        public NewsModel build() {
+            return new NewsModel(this);
+        }
+
+    }
+
     public NewsModel() {}
+
+    public NewsModel(NewsBuilder builder) {
+        id = builder.id;
+        title = builder.title;
+        content = builder.content;
+        createDate = builder.createDate;
+        lastUpdateDate = builder.lastUpdateDate;
+        authorModel = builder.authorModel;
+        tagModelSet = builder.tagModelSet;
+    }
 
     @Override
     public Long getId() {

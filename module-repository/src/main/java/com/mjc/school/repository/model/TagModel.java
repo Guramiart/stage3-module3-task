@@ -24,7 +24,33 @@ public class TagModel implements BaseEntity<Long> {
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "tagModelSet")
     private Set<NewsModel> newsModelSet;
 
+    public static class TagBuilder {
+        private final Long id;
+        private final String name;
+        private Set<NewsModel> newsModelSet;
+
+        public TagBuilder(Long id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
+        public TagBuilder newsModelSet(Set<NewsModel> set) {
+            newsModelSet = set;
+            return this;
+        }
+
+        public TagModel build() {
+            return new TagModel(this);
+        }
+    }
+
     public TagModel() {}
+
+    public TagModel(TagBuilder builder) {
+        id = builder.id;
+        name = builder.name;
+        newsModelSet = builder.newsModelSet;
+    }
 
     @Override
     public Long getId() {

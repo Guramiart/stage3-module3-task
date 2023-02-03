@@ -37,6 +37,46 @@ public class AuthorModel implements BaseEntity<Long> {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "authorModel", cascade = CascadeType.REMOVE)
     private List<NewsModel> newsModelList;
 
+    public static class AuthorBuilder {
+        private final Long id;
+        private final String name;
+        private LocalDateTime createDate;
+        private LocalDateTime lastUpdateDate;
+        private List<NewsModel> newsModelList;
+
+        public AuthorBuilder(Long id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
+        public AuthorBuilder createDate(LocalDateTime value) {
+            createDate = value;
+            return this;
+        }
+
+        public AuthorBuilder lastUpdateDate(LocalDateTime value) {
+            lastUpdateDate = value;
+            return this;
+        }
+
+        public AuthorBuilder newsModelList(List<NewsModel> value) {
+            newsModelList = value;
+            return this;
+        }
+
+        public AuthorModel build() {
+            return new AuthorModel(this);
+        }
+    }
+
+    private AuthorModel(AuthorBuilder builder) {
+        id = builder.id;
+        name = builder.name;
+        createDate = builder.createDate;
+        lastUpdateDate = builder.lastUpdateDate;
+        newsModelList = builder.newsModelList;
+    }
+
     public AuthorModel() {}
 
     @Override
