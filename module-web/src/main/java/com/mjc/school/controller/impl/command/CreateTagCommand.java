@@ -3,7 +3,7 @@ package com.mjc.school.controller.impl.command;
 import com.mjc.school.controller.BaseController;
 import com.mjc.school.controller.Command;
 import com.mjc.school.controller.constants.Constants;
-import com.mjc.school.service.builder.TagRequestBuilder;
+
 import com.mjc.school.service.dto.impl.TagDtoRequest;
 import com.mjc.school.service.dto.impl.TagDtoResponse;
 import com.mjc.school.service.exceptions.ServiceException;
@@ -28,8 +28,8 @@ public class CreateTagCommand implements Command {
                 System.out.println(OPERATION);
                 System.out.println(Constants.TAG_NAME_RESP);
                 String name = sc.nextLine();
-                TagDtoRequest tagDtoRequest = new TagRequestBuilder()
-                        .setName(name)
+                TagDtoRequest tagDtoRequest = new TagDtoRequest
+                        .TagDtoRequestBuilder(name)
                         .build();
                 controller.create(tagDtoRequest);
                 isValid = true;

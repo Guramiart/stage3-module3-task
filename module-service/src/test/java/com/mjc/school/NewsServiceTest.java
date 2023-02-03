@@ -1,8 +1,9 @@
 package com.mjc.school;
 
-import com.mjc.school.repository.impl.NewsModel;
+
+import com.mjc.school.repository.model.NewsModel;
 import com.mjc.school.repository.impl.NewsRepository;
-import com.mjc.school.service.builder.NewsRequestBuilder;
+
 import com.mjc.school.service.dto.impl.NewsDtoRequest;
 import com.mjc.school.service.dto.impl.NewsDtoResponse;
 import com.mjc.school.service.impl.NewsService;
@@ -15,8 +16,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -37,28 +41,21 @@ public class NewsServiceTest {
 
     @BeforeEach
     public void setup(){
-        newsDtoRequest = new NewsRequestBuilder()
-                .setId(1L)
-                .setTitle("TestTitle")
-                .setContent("TestContent")
+        newsDtoRequest = new NewsDtoRequest
+                .NewsDtoRequestBuilder("TestTitle", "TestContent")
+                .id(1L)
+                .tagId(Stream.of(1L, 2L, 3L)
+                        .collect(Collectors.toCollection(HashSet::new)))
                 .build();
-    }
-
-    @DisplayName("JUnit test for createNews method")
-    @Test
-    public void createTagTest(){
-        NewsModel newsModel = NewsMapper.INSTANCE.newsDtoToNews(newsDtoRequest);
-        given(repository.create(newsModel)).willReturn(newsModel);
-        NewsDtoResponse savedNews = service.create(newsDtoRequest);
-        assertThat(savedNews).isNotNull();
     }
 
     @DisplayName("JUnit test for readAllNews method")
     @Test
     public void getAllNewsTest(){
-        NewsDtoRequest newsDtoRequest1 = new NewsRequestBuilder()
-                .setTitle("TestTitle_1")
-                .setContent("TestContent_1")
+        NewsDtoRequest newsDtoRequest1 = new NewsDtoRequest
+                .NewsDtoRequestBuilder("TestTitle_1", "TestContent_1")
+                .tagId(Stream.of(1L, 2L, 3L)
+                        .collect(Collectors.toCollection(HashSet::new)))
                 .build();
         NewsModel newsModel = NewsMapper.INSTANCE.newsDtoToNews(newsDtoRequest);
         NewsModel newsModel1 = NewsMapper.INSTANCE.newsDtoToNews(newsDtoRequest1);

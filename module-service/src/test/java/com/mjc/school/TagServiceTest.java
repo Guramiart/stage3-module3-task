@@ -1,8 +1,7 @@
 package com.mjc.school;
 
-import com.mjc.school.repository.impl.TagModel;
+import com.mjc.school.repository.model.TagModel;
 import com.mjc.school.repository.impl.TagRepository;
-import com.mjc.school.service.builder.TagRequestBuilder;
 import com.mjc.school.service.dto.impl.TagDtoRequest;
 import com.mjc.school.service.dto.impl.TagDtoResponse;
 import com.mjc.school.service.impl.TagService;
@@ -37,9 +36,9 @@ public class TagServiceTest {
 
     @BeforeEach
     public void setup(){
-        tagDtoRequest = new TagRequestBuilder()
-                .setId(1L)
-                .setName("TestTag")
+        tagDtoRequest = new TagDtoRequest
+                .TagDtoRequestBuilder("TestTag")
+                .id(1L)
                 .build();
     }
 
@@ -55,8 +54,8 @@ public class TagServiceTest {
     @DisplayName("JUnit test for readAllTag method")
     @Test
     public void getAllTagsTest(){
-        TagDtoRequest tagDtoRequest1 = new TagRequestBuilder()
-                .setName("TestTag_1")
+        TagDtoRequest tagDtoRequest1 = new TagDtoRequest
+                .TagDtoRequestBuilder("TestTag_1")
                 .build();
         TagModel tagModel = TagMapper.INSTANCE.tagDtoToTag(tagDtoRequest);
         TagModel tagModel1 = TagMapper.INSTANCE.tagDtoToTag(tagDtoRequest1);

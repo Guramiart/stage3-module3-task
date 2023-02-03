@@ -17,7 +17,47 @@ public class NewsDtoRequest implements BaseDto<Long> {
     private Long authorId;
     private Set<Long> tagId;
 
+    public static class NewsDtoRequestBuilder {
+        private Long id;
+        private final String title;
+        private final String content;
+        private Long authorId;
+        private Set<Long> tagId;
+
+        public NewsDtoRequestBuilder(String title, String content) {
+            this.title = title;
+            this.content = content;
+        }
+
+        public NewsDtoRequestBuilder id(Long value) {
+            id = value;
+            return this;
+        }
+
+        public NewsDtoRequestBuilder authorId(Long value) {
+            authorId = value;
+            return this;
+        }
+
+        public NewsDtoRequestBuilder tagId(Set<Long> set) {
+            tagId = set;
+            return this;
+        }
+
+        public NewsDtoRequest build() {
+            return new NewsDtoRequest(this);
+        }
+    }
+
     public NewsDtoRequest() {}
+
+    public NewsDtoRequest(NewsDtoRequestBuilder builder) {
+        id = builder.id;
+        title = builder.title;
+        content = builder.content;
+        authorId = builder.authorId;
+        tagId = builder.tagId;
+    }
 
     public Long getId() {
         return id;
