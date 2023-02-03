@@ -24,7 +24,6 @@ subprojects {
         implementation "org.springframework.boot:spring-boot-starter-data-jpa:$jpaVersion"
         implementation "org.springframework.boot:spring-boot-starter-jdbc:$jdbcVersion"
         implementation "com.mysql:mysql-connector-j:$connectorVersion"
-        implementation 'javax.persistence:javax.persistence-api:2.2'
 
         testImplementation "org.springframework.boot:spring-boot-starter-test:$jpaTestVersion"
         testImplementation "org.springframework:spring-test:$springVersion"
