@@ -1,6 +1,5 @@
-package com.mjc.school.repository.impl;
+package com.mjc.school.repository.model;
 
-import com.mjc.school.repository.model.BaseEntity;
 import jakarta.persistence.*;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.annotation.CreatedDate;

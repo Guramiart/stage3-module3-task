@@ -1,8 +1,8 @@
 package com.mjc.school.repository.builder;
 
 import com.mjc.school.repository.Builder;
-import com.mjc.school.repository.impl.AuthorModel;
-import com.mjc.school.repository.impl.NewsModel;
+import com.mjc.school.repository.model.AuthorModel;
+import com.mjc.school.repository.model.NewsModel;
 import org.springframework.context.annotation.Scope;
 
 import java.time.LocalDateTime;

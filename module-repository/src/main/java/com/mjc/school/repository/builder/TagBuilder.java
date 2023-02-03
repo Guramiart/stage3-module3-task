@@ -1,7 +1,7 @@
 package com.mjc.school.repository.builder;
 
 import com.mjc.school.repository.Builder;
-import com.mjc.school.repository.impl.TagModel;
+import com.mjc.school.repository.model.TagModel;
 
 public class TagBuilder implements Builder<TagModel> {
 

@@ -1,14 +1,10 @@
 package com.mjc.school;
 
-import com.mjc.school.repository.impl.NewsModel;
+import com.mjc.school.repository.model.NewsModel;
 import com.mjc.school.repository.impl.NewsRepository;
-import com.mjc.school.service.builder.AuthorRequestBuilder;
 import com.mjc.school.service.builder.NewsRequestBuilder;
-import com.mjc.school.service.builder.TagRequestBuilder;
-import com.mjc.school.service.dto.impl.AuthorDtoRequest;
 import com.mjc.school.service.dto.impl.NewsDtoRequest;
 import com.mjc.school.service.dto.impl.NewsDtoResponse;
-import com.mjc.school.service.dto.impl.TagDtoRequest;
 import com.mjc.school.service.impl.NewsService;
 import com.mjc.school.service.mapper.NewsMapper;
 import org.junit.jupiter.api.BeforeEach;

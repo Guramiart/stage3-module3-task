@@ -1,6 +1,6 @@
 package com.mjc.school;
 
-import com.mjc.school.repository.impl.TagModel;
+import com.mjc.school.repository.model.TagModel;
 import com.mjc.school.repository.impl.TagRepository;
 import com.mjc.school.service.builder.TagRequestBuilder;
 import com.mjc.school.service.dto.impl.TagDtoRequest;
