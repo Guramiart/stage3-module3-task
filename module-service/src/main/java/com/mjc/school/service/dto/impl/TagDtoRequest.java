@@ -15,7 +15,36 @@ public class TagDtoRequest implements BaseDto<Long> {
     private String name;
     private Set<Long> tagId;
 
+    public static class TagDtoRequestBuilder {
+        private Long id;
+        private final String name;
+        private Set<Long> tagId;
+
+        public TagDtoRequestBuilder(String name) {
+            this.name = name;
+        }
+
+        public TagDtoRequestBuilder id(Long value) {
+            id = value;
+            return this;
+        }
+        public TagDtoRequestBuilder tagId(Set<Long> set) {
+            tagId = set;
+            return this;
+        }
+
+        public TagDtoRequest build() {
+            return new TagDtoRequest(this);
+        }
+    }
+
     public TagDtoRequest() {}
+
+    public TagDtoRequest(TagDtoRequestBuilder builder) {
+        id = builder.id;
+        name = builder.name;
+        tagId = builder.tagId;
+    }
 
     public Long getId() {
         return id;

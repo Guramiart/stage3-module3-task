@@ -2,7 +2,6 @@ package com.mjc.school;
 
 import com.mjc.school.repository.model.NewsModel;
 import com.mjc.school.repository.impl.NewsRepository;
-import com.mjc.school.service.builder.NewsRequestBuilder;
 import com.mjc.school.service.dto.impl.NewsDtoRequest;
 import com.mjc.school.service.dto.impl.NewsDtoResponse;
 import com.mjc.school.service.impl.NewsService;
@@ -41,21 +40,21 @@ public class NewsServiceTest {
     @BeforeEach
     public void setup(){
 
-        newsDtoRequest = new NewsRequestBuilder()
-                .setId(1L)
-                .setTitle("TestTitle")
-                .setContent("TestContent")
-                .setTagId(Stream.of(1L, 2L, 3L).collect(Collectors.toCollection(HashSet::new)))
+        newsDtoRequest = new NewsDtoRequest
+                .NewsDtoRequestBuilder("TestTitle", "TestContent")
+                .id(1L)
+                .tagId(Stream.of(1L, 2L, 3L)
+                        .collect(Collectors.toCollection(HashSet::new)))
                 .build();
     }
 
     @DisplayName("JUnit test for readAllNews method")
     @Test
     public void getAllNewsTest(){
-        NewsDtoRequest newsDtoRequest1 = new NewsRequestBuilder()
-                .setTitle("TestTitle_1")
-                .setContent("TestContent_1")
-                .setTagId(Stream.of(1L, 2L, 3L).collect(Collectors.toCollection(HashSet::new)))
+        NewsDtoRequest newsDtoRequest1 = new NewsDtoRequest
+                .NewsDtoRequestBuilder("TestTitle_1", "TestContent_1")
+                .tagId(Stream.of(1L, 2L, 3L)
+                        .collect(Collectors.toCollection(HashSet::new)))
                 .build();
         NewsModel newsModel = NewsMapper.INSTANCE.newsDtoToNews(newsDtoRequest);
         NewsModel newsModel1 = NewsMapper.INSTANCE.newsDtoToNews(newsDtoRequest1);

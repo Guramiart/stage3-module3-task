@@ -4,7 +4,6 @@ import com.mjc.school.controller.BaseController;
 import com.mjc.school.controller.Command;
 import com.mjc.school.controller.constants.Constants;
 import com.mjc.school.controller.utils.ScannerUtils;
-import com.mjc.school.service.builder.NewsRequestBuilder;
 import com.mjc.school.service.dto.impl.NewsDtoRequest;
 import com.mjc.school.service.dto.impl.NewsDtoResponse;
 import com.mjc.school.service.exceptions.ServiceException;
@@ -37,11 +36,10 @@ public class CreateNewsCommand implements Command {
                 Long authorId = ScannerUtils.getNumberFromScanner("News", sc);
                 System.out.println(Constants.TAG_IDS_RESP);
                 Set<Long> tagIdSet = ScannerUtils.getSetNumberFromScanner("News", sc);
-                NewsDtoRequest newsDtoRequest = new NewsRequestBuilder()
-                        .setTitle(title)
-                        .setContent(content)
-                        .setTagId(tagIdSet)
-                        .setAuthorId(authorId)
+                NewsDtoRequest newsDtoRequest = new NewsDtoRequest
+                        .NewsDtoRequestBuilder(title, content)
+                        .tagId(tagIdSet)
+                        .authorId(authorId)
                         .build();
                 controller.create(newsDtoRequest);
                 isValid = true;

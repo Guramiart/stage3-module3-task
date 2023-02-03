@@ -16,7 +16,37 @@ public class AuthorDtoRequest implements BaseDto<Long> {
 
     private List<NewsDtoRequest> newsList;
 
+    public static class AuthorDtoRequestBuilder {
+        private Long id;
+        private final String name;
+        private List<NewsDtoRequest> newsList;
+
+        public AuthorDtoRequestBuilder(String name) {
+            this.name = name;
+        }
+
+        public AuthorDtoRequestBuilder id(Long value){
+            id = value;
+            return this;
+        }
+
+        public AuthorDtoRequestBuilder newsList(List<NewsDtoRequest> list) {
+            newsList = list;
+            return this;
+        }
+
+        public AuthorDtoRequest build() {
+            return new AuthorDtoRequest(this);
+        }
+    }
+
     public AuthorDtoRequest() {}
+
+    public AuthorDtoRequest(AuthorDtoRequestBuilder builder) {
+        id = builder.id;
+        name = builder.name;
+        newsList = builder.newsList;
+    }
 
     public Long getId() {
         return id;

@@ -2,7 +2,6 @@ package com.mjc.school;
 
 import com.mjc.school.repository.model.AuthorModel;
 import com.mjc.school.repository.impl.AuthorRepository;
-import com.mjc.school.service.builder.AuthorRequestBuilder;
 import com.mjc.school.service.dto.impl.AuthorDtoRequest;
 import com.mjc.school.service.dto.impl.AuthorDtoResponse;
 import com.mjc.school.service.impl.AuthorService;
@@ -35,9 +34,9 @@ public class AuthorServiceTest {
 
     @BeforeEach
     public void setup(){
-        authorDtoRequest = new AuthorRequestBuilder()
-                .setId(1L)
-                .setName("TestAuthor")
+        authorDtoRequest = new AuthorDtoRequest
+                .AuthorDtoRequestBuilder("TestAuthor")
+                .id(1L)
                 .build();
     }
 
@@ -53,8 +52,8 @@ public class AuthorServiceTest {
     @DisplayName("JUnit test for readAllAuthor method")
     @Test
     public void getAllAuthorsTest(){
-        AuthorDtoRequest authorDtoRequest1 = new AuthorRequestBuilder()
-                .setName("TestAuthor_2")
+        AuthorDtoRequest authorDtoRequest1 = new AuthorDtoRequest
+                .AuthorDtoRequestBuilder("TestAuthor_2")
                 .build();
         AuthorModel authorModel = AuthorMapper.INSTANCE.authorDtoToAuthor(authorDtoRequest);
         AuthorModel authorModel1 = AuthorMapper.INSTANCE.authorDtoToAuthor(authorDtoRequest1);

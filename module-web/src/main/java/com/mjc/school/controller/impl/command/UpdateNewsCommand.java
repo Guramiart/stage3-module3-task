@@ -4,7 +4,6 @@ import com.mjc.school.controller.BaseController;
 import com.mjc.school.controller.Command;
 import com.mjc.school.controller.constants.Constants;
 import com.mjc.school.controller.utils.ScannerUtils;
-import com.mjc.school.service.builder.NewsRequestBuilder;
 import com.mjc.school.service.dto.impl.NewsDtoRequest;
 import com.mjc.school.service.dto.impl.NewsDtoResponse;
 import com.mjc.school.service.exceptions.ServiceException;
@@ -36,11 +35,10 @@ public class UpdateNewsCommand implements Command {
                 String content = sc.nextLine();
                 System.out.println(Constants.AUTHOR_ID_RESP);
                 Long authorId = ScannerUtils.getNumberFromScanner("Author", sc);
-                NewsDtoRequest newsDtoRequest = new NewsRequestBuilder()
-                        .setId(newsId)
-                        .setTitle(title)
-                        .setContent(content)
-                        .setAuthorId(authorId)
+                NewsDtoRequest newsDtoRequest = new NewsDtoRequest
+                        .NewsDtoRequestBuilder(title, content)
+                        .id(newsId)
+                        .authorId(authorId)
                         .build();
                 System.out.println(controller.update(newsDtoRequest));
                 isValid = true;
