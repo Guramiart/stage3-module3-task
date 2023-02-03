@@ -20,6 +20,7 @@ subprojects {
 
     dependencies {
         implementation "org.springframework:spring-context:$springVersion"
+        implementation "org.springframework.boot:spring-boot-starter-web"
         implementation "org.springframework.boot:spring-boot-starter-aop:$aopVersion"
         implementation "org.springframework.boot:spring-boot-starter-data-jpa:$jpaVersion"
         implementation "org.springframework.boot:spring-boot-starter-jdbc:$jdbcVersion"
