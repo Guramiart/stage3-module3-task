@@ -39,6 +39,14 @@ subprojects {
     test {
         useJUnitPlatform()
     }
+
+    tasks.withType(JavaCompile) {
+        options.compilerArgs = [
+                "-Xlint:deprecation",
+                "-Xlint:unchecked",
+                "-parameters",
+        ]
+    }
 }
 
 task repack(type: Jar, dependsOn: ':module-main:build') {
