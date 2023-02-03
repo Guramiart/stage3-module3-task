@@ -1,7 +1,9 @@
 package com.mjc.school;
 
+
 import com.mjc.school.repository.model.NewsModel;
 import com.mjc.school.repository.impl.NewsRepository;
+
 import com.mjc.school.service.dto.impl.NewsDtoRequest;
 import com.mjc.school.service.dto.impl.NewsDtoResponse;
 import com.mjc.school.service.impl.NewsService;
@@ -39,7 +41,6 @@ public class NewsServiceTest {
 
     @BeforeEach
     public void setup(){
-
         newsDtoRequest = new NewsDtoRequest
                 .NewsDtoRequestBuilder("TestTitle", "TestContent")
                 .id(1L)

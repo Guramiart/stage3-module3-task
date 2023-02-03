@@ -1,6 +1,7 @@
 package com.mjc.school.repository.impl;
 
 import com.mjc.school.repository.BaseRepository;
+
 import com.mjc.school.repository.model.NewsModel;
 import com.mjc.school.repository.model.TagModel;
 import jakarta.persistence.EntityManager;
