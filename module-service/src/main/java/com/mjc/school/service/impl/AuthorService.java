@@ -15,6 +15,7 @@ import com.mjc.school.service.mapper.AuthorMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,6 +51,7 @@ public class AuthorService implements BaseService<AuthorDtoRequest, AuthorDtoRes
 
     @Override
     @Valid
+    @Transactional
     public AuthorDtoResponse create(AuthorDtoRequest createRequest) {
         AuthorModel authorModel = repository.create(AuthorMapper.INSTANCE.authorDtoToAuthor(createRequest));
         return AuthorMapper.INSTANCE.authorToAuthorDto(authorModel);
@@ -57,6 +59,7 @@ public class AuthorService implements BaseService<AuthorDtoRequest, AuthorDtoRes
 
     @Override
     @Valid
+    @Transactional
     public AuthorDtoResponse update(AuthorDtoRequest updateRequest) {
         if(!repository.existById(updateRequest.getId())) {
             throw new ServiceException(String.format(
@@ -69,6 +72,7 @@ public class AuthorService implements BaseService<AuthorDtoRequest, AuthorDtoRes
 
     @Override
     @NotEmpty
+    @Transactional
     public boolean deleteById(Long id) {
         if(!repository.existById(id)) {
             throw new ServiceException(String.format(

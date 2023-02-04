@@ -15,6 +15,7 @@ import com.mjc.school.service.mapper.TagMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,6 +51,7 @@ public class TagService implements BaseService<TagDtoRequest, TagDtoResponse, Lo
 
     @Override
     @Valid
+    @Transactional
     public TagDtoResponse create(TagDtoRequest createRequest) {
         TagModel tagModel = repository.create(TagMapper.INSTANCE.tagDtoToTag(createRequest));
         return TagMapper.INSTANCE.tagToTagDto(tagModel);
@@ -57,6 +59,7 @@ public class TagService implements BaseService<TagDtoRequest, TagDtoResponse, Lo
 
     @Override
     @Valid
+    @Transactional
     public TagDtoResponse update(TagDtoRequest updateRequest) {
         if(!repository.existById(updateRequest.getId())) {
             throw new ServiceException(String.format(
@@ -69,6 +72,7 @@ public class TagService implements BaseService<TagDtoRequest, TagDtoResponse, Lo
 
     @Override
     @NotEmpty
+    @Transactional
     public boolean deleteById(Long id) {
         if(!repository.existById(id)) {
             throw new ServiceException(String.format(

@@ -13,7 +13,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Predicate;
-import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import java.util.Set;
@@ -38,14 +37,12 @@ public class NewsRepository implements BaseRepository<NewsModel, Long> {
     }
 
     @Override
-    @Transactional
     public NewsModel create(NewsModel entity) {
         entityManager.persist(entity);
         return entity;
     }
 
     @Override
-    @Transactional
     public NewsModel update(NewsModel entity) {
         NewsModel model = entityManager.getReference(NewsModel.class, entity.getId());
         model.setTitle(entity.getTitle());
@@ -55,7 +52,6 @@ public class NewsRepository implements BaseRepository<NewsModel, Long> {
     }
 
     @Override
-    @Transactional
     public boolean deleteById(Long id) {
         Optional<NewsModel> authorModel = readById(id);
         authorModel.ifPresent(model -> entityManager.remove(model));
