@@ -22,9 +22,7 @@ import com.mjc.school.service.mapper.TagMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -120,8 +118,9 @@ public class NewsService implements BaseService<NewsDtoRequest, NewsDtoResponse,
                 .collect(Collectors.toSet());
     }
 
-    public List<NewsDtoResponse> readNewsByParam(Object ...params) {
-        return ((NewsRepository) newsRepository).readNewsByParam(params)
+    public List<NewsDtoResponse> readNewsByParam(Set<String> names, Set<Long> ids,
+                                                 String author, String title, String content) {
+        return ((NewsRepository) newsRepository).readNewsByParam(names, ids, author, title, content)
                 .stream()
                 .map(NewsMapper.INSTANCE::newsToNewsDto)
                 .collect(Collectors.toList());

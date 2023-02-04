@@ -170,6 +170,16 @@ public class NewsModel implements BaseEntity<Long> {
         this.tagModelSet = tagModelSet;
     }
 
+    public void addTag(TagModel tag) {
+        this.tagModelSet.add(tag);
+        tag.getNewsModelList().add(this);
+    }
+
+    public void removeTag(TagModel tag) {
+        this.tagModelSet.remove(tag);
+        tag.getNewsModelList().remove(this);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
