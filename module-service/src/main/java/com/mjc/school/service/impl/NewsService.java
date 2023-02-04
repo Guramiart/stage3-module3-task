@@ -22,6 +22,7 @@ import com.mjc.school.service.mapper.TagMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -64,6 +65,7 @@ public class NewsService implements BaseService<NewsDtoRequest, NewsDtoResponse,
 
     @Override
     @Valid
+    @Transactional
     public NewsDtoResponse create(NewsDtoRequest createRequest) {
         if(authorRepository.existById(createRequest.getAuthorId())) {
             NewsModel newsModel = newsRepository.create(NewsMapper.INSTANCE.newsDtoToNews(createRequest));
@@ -76,6 +78,7 @@ public class NewsService implements BaseService<NewsDtoRequest, NewsDtoResponse,
 
     @Override
     @Valid
+    @Transactional
     public NewsDtoResponse update(NewsDtoRequest updateRequest) {
         if(!newsRepository.existById(updateRequest.getId())) {
             throw new ServiceException(String.format(
@@ -92,6 +95,7 @@ public class NewsService implements BaseService<NewsDtoRequest, NewsDtoResponse,
 
     @Override
     @NotEmpty
+    @Transactional
     public boolean deleteById(Long id) {
         if(!newsRepository.existById(id)) {
             throw new ServiceException(String.format(
