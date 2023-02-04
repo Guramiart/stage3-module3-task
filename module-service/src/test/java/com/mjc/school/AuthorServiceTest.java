@@ -35,7 +35,7 @@ public class AuthorServiceTest {
     private AuthorDtoRequest authorDtoRequest;
 
     @BeforeEach
-    public void setup(){
+    void setup(){
         authorDtoRequest = new AuthorDtoRequest
                 .AuthorDtoRequestBuilder("TestAuthor")
                 .id(1L)
@@ -44,7 +44,7 @@ public class AuthorServiceTest {
 
     @DisplayName("JUnit test for createAuthor method")
     @Test
-    public void createAuthorTest(){
+    void createAuthorTest(){
         AuthorModel authorModel = AuthorMapper.INSTANCE.authorDtoToAuthor(authorDtoRequest);
         given(repository.create(authorModel)).willReturn(authorModel);
         AuthorDtoResponse savedAuthor = service.create(authorDtoRequest);
@@ -53,7 +53,7 @@ public class AuthorServiceTest {
 
     @DisplayName("JUnit test for readAllAuthor method")
     @Test
-    public void getAllAuthorsTest(){
+    void getAllAuthorsTest(){
         AuthorDtoRequest authorDtoRequest1 = new AuthorDtoRequest
                 .AuthorDtoRequestBuilder("TestAuthor_2")
                 .build();
@@ -64,12 +64,12 @@ public class AuthorServiceTest {
         List<AuthorDtoResponse> authorList = service.readAll();
 
         assertThat(authorList).isNotNull();
-        assertThat(authorList.size()).isEqualTo(2);
+        assertThat(authorList).hasSize(2);
     }
 
     @DisplayName("JUnit test for getAuthorById method")
     @Test
-    public void getAuthorByIdTest(){
+    void getAuthorByIdTest(){
         AuthorModel authorModel = AuthorMapper.INSTANCE.authorDtoToAuthor(authorDtoRequest);
         given(repository.readById(1L)).willReturn(Optional.of(authorModel));
         AuthorDtoResponse savedAuthor = service.readById(authorModel.getId());
@@ -78,7 +78,7 @@ public class AuthorServiceTest {
 
     @DisplayName("JUnit test for updateAuthor method")
     @Test
-    public void updateAuthorTest(){
+    void updateAuthorTest(){
         authorDtoRequest.setName("UpdateName");
         AuthorModel authorModel = AuthorMapper.INSTANCE.authorDtoToAuthor(authorDtoRequest);
         given(repository.update(authorModel)).willReturn(authorModel);
@@ -89,7 +89,7 @@ public class AuthorServiceTest {
 
     @DisplayName("JUnit test for deleteAuthor method")
     @Test
-    public void deleteAuthorTest(){
+    void deleteAuthorTest(){
         given(repository.deleteById(1L)).willReturn(true);
         given(repository.existById(any())).willReturn(true);
         service.deleteById(1L);

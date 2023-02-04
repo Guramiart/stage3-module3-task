@@ -40,7 +40,7 @@ public class NewsServiceTest {
     private NewsDtoRequest newsDtoRequest;
 
     @BeforeEach
-    public void setup(){
+    void setup(){
         newsDtoRequest = new NewsDtoRequest
                 .NewsDtoRequestBuilder("TestTitle", "TestContent")
                 .id(1L)
@@ -51,7 +51,7 @@ public class NewsServiceTest {
 
     @DisplayName("JUnit test for readAllNews method")
     @Test
-    public void getAllNewsTest(){
+    void getAllNewsTest(){
         NewsDtoRequest newsDtoRequest1 = new NewsDtoRequest
                 .NewsDtoRequestBuilder("TestTitle_1", "TestContent_1")
                 .tagId(Stream.of(1L, 2L, 3L)
@@ -64,12 +64,12 @@ public class NewsServiceTest {
         List<NewsDtoResponse> newsList = service.readAll();
 
         assertThat(newsList).isNotNull();
-        assertThat(newsList.size()).isEqualTo(2);
+        assertThat(newsList).hasSize(2);
     }
 
     @DisplayName("JUnit test for getNewsById method")
     @Test
-    public void getNewsByIdTest(){
+    void getNewsByIdTest(){
         NewsModel newsModel = NewsMapper.INSTANCE.newsDtoToNews(newsDtoRequest);
         given(repository.readById(1L)).willReturn(Optional.of(newsModel));
         NewsDtoResponse savedNews = service.readById(newsModel.getId());
@@ -78,7 +78,7 @@ public class NewsServiceTest {
 
     @DisplayName("JUnit test for updateNews method")
     @Test
-    public void updateNewsTest(){
+    void updateNewsTest(){
         newsDtoRequest.setTitle("UpdateTitle");
         newsDtoRequest.setContent("UpdateContent");
         NewsModel newsModel = NewsMapper.INSTANCE.newsDtoToNews(newsDtoRequest);
@@ -91,7 +91,7 @@ public class NewsServiceTest {
 
     @DisplayName("JUnit test for deleteNews method")
     @Test
-    public void deleteNewsTest(){
+    void deleteNewsTest(){
         given(repository.deleteById(1L)).willReturn(true);
         given(repository.existById(any())).willReturn(true);
         service.deleteById(1L);
