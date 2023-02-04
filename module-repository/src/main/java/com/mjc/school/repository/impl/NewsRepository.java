@@ -2,6 +2,7 @@ package com.mjc.school.repository.impl;
 
 import com.mjc.school.repository.BaseRepository;
 
+import com.mjc.school.repository.model.AuthorModel;
 import com.mjc.school.repository.model.NewsModel;
 import com.mjc.school.repository.model.TagModel;
 import javax.persistence.EntityManager;
@@ -10,7 +11,6 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
-import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Predicate;
 import javax.transaction.Transactional;
@@ -22,7 +22,6 @@ import java.util.Optional;
 import java.util.ArrayList;
 
 @Repository
-@Transactional
 public class NewsRepository implements BaseRepository<NewsModel, Long> {
 
     @PersistenceContext
@@ -39,12 +38,14 @@ public class NewsRepository implements BaseRepository<NewsModel, Long> {
     }
 
     @Override
+    @Transactional
     public NewsModel create(NewsModel entity) {
         entityManager.persist(entity);
         return entity;
     }
 
     @Override
+    @Transactional
     public NewsModel update(NewsModel entity) {
         NewsModel model = entityManager.getReference(NewsModel.class, entity.getId());
         model.setTitle(entity.getTitle());
@@ -54,6 +55,7 @@ public class NewsRepository implements BaseRepository<NewsModel, Long> {
     }
 
     @Override
+    @Transactional
     public boolean deleteById(Long id) {
         Optional<NewsModel> authorModel = readById(id);
         authorModel.ifPresent(model -> entityManager.remove(model));
@@ -73,36 +75,43 @@ public class NewsRepository implements BaseRepository<NewsModel, Long> {
         return model.getTagModelSet();
     }
 
-    public List<NewsModel> readNewsByParam(Object ... params) {
+    public List<NewsModel> readNewsByParam(Set<String> names, Set<Long> ids,
+                                           String author, String title, String content) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<NewsModel> query = criteriaBuilder.createQuery(NewsModel.class);
         Root<NewsModel> root = query.from(NewsModel.class);
-        root.join("authorModel", JoinType.INNER);
-        root.fetch("authorModel", JoinType.INNER);
-        Join<NewsModel, TagModel> newsModelTagModelJoin = root.join("tagModelSet", JoinType.INNER);
-        root.fetch("tagModelSet", JoinType.INNER);
+        Join<NewsModel, AuthorModel> authorModelJoin = root.join("authorModel");
+        root.fetch("authorModel");
 
         List<NewsModel> results = new ArrayList<>();
         List<Predicate> predicates = new ArrayList<>();
-        Set<?> tagNames = (Set<?>) params[0];
-        Set<?> tagIds = (Set<?>) params[1];
-        if(tagNames.size() != 0) {
-            predicates.add(criteriaBuilder.and(newsModelTagModelJoin.get("name").in(List.of(tagNames))));
+
+        if(names.size() != 0) {
+            for(String name : names) {
+                Join<NewsModel, TagModel> tagModelJoin = root.join("tagModelSet");
+                root.fetch("tagModelSet");
+                predicates.add(criteriaBuilder.equal(tagModelJoin.get("name"), name));
+            }
         }
-        if(tagIds.size() != 0) {
-            predicates.add(criteriaBuilder.and(newsModelTagModelJoin.get("id").in(List.of(tagIds))));
+        if(ids.size() != 0) {
+            for(Long id : ids) {
+                Join<NewsModel, TagModel> tagModelJoin = root.join("tagModelSet");
+                root.fetch("tagModelSet");
+                predicates.add(criteriaBuilder.equal(tagModelJoin.get("id"), id));
+            }
         }
-        if(!("".equals(params[2]))) {
-            predicates.add(criteriaBuilder.equal(root.get("authorModel").get("name"), params[2]));
+        if(!("".equals(author))) {
+            predicates.add(criteriaBuilder.equal(authorModelJoin.get("name"), author));
         }
-        if(!("".equals(params[3]))) {
-            predicates.add(criteriaBuilder.equal(root.get("title"), params[3]));
+        if(!("".equals(title))) {
+            predicates.add(criteriaBuilder.equal(root.get("title"), title));
         }
-        if(!("".equals(params[4]))) {
-            predicates.add(criteriaBuilder.equal(root.get("content"), params[4]));
+        if(!("".equals(content))) {
+            predicates.add(criteriaBuilder.equal(root.get("content"), content));
         }
         if(predicates.size() != 0) {
-            query.select(root).where(predicates.toArray(new Predicate[]{}));
+            Predicate and = criteriaBuilder.and(predicates.toArray(new Predicate[]{}));
+            query.select(root).distinct(true).where(and);
             results = entityManager.createQuery(query).getResultList();
         }
         return results;

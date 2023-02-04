@@ -29,20 +29,20 @@ public class TagModel implements BaseEntity<Long> {
     private String name;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "tagModelSet")
-    private Set<NewsModel> newsModelSet;
+    private Set<NewsModel> newsModelList;
 
     public static class TagBuilder {
         private final Long id;
         private final String name;
-        private Set<NewsModel> newsModelSet;
+        private Set<NewsModel> newsModelList;
 
         public TagBuilder(Long id, String name) {
             this.id = id;
             this.name = name;
         }
 
-        public TagBuilder newsModelSet(Set<NewsModel> set) {
-            newsModelSet = set;
+        public TagBuilder newsModelList(Set<NewsModel> list) {
+            newsModelList = list;
             return this;
         }
 
@@ -56,7 +56,7 @@ public class TagModel implements BaseEntity<Long> {
     public TagModel(TagBuilder builder) {
         id = builder.id;
         name = builder.name;
-        newsModelSet = builder.newsModelSet;
+        newsModelList = builder.newsModelList;
     }
 
     @Override
@@ -77,12 +77,12 @@ public class TagModel implements BaseEntity<Long> {
         this.name = name;
     }
 
-    public Set<NewsModel> getNewsModelSet() {
-        return newsModelSet;
+    public Set<NewsModel> getNewsModelList() {
+        return newsModelList;
     }
 
-    public void setNewsModelSet(Set<NewsModel> newsModelSet) {
-        this.newsModelSet = newsModelSet;
+    public void setNewsModelList(Set<NewsModel> newsModelList) {
+        this.newsModelList = newsModelList;
     }
 
     @Override

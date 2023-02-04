@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-@Transactional
 public class AuthorRepository implements BaseRepository<AuthorModel, Long> {
 
     @PersistenceContext
@@ -28,12 +27,14 @@ public class AuthorRepository implements BaseRepository<AuthorModel, Long> {
     }
 
     @Override
+    @Transactional
     public AuthorModel create(AuthorModel entity) {
         entityManager.persist(entity);
         return entity;
     }
 
     @Override
+    @Transactional
     public AuthorModel update(AuthorModel entity) {
         AuthorModel model = entityManager.getReference(AuthorModel.class, entity.getId());
         model.setName(entity.getName());
@@ -41,6 +42,7 @@ public class AuthorRepository implements BaseRepository<AuthorModel, Long> {
     }
 
     @Override
+    @Transactional
     public boolean deleteById(Long id) {
         Optional<AuthorModel> authorModel = readById(id);
         authorModel.ifPresent(model -> entityManager.remove(model));
