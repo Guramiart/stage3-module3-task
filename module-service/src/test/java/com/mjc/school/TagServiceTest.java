@@ -35,7 +35,7 @@ public class TagServiceTest {
     private TagDtoRequest tagDtoRequest;
 
     @BeforeEach
-    public void setup(){
+    void setup(){
         tagDtoRequest = new TagDtoRequest
                 .TagDtoRequestBuilder("TestTag")
                 .id(1L)
@@ -44,7 +44,7 @@ public class TagServiceTest {
 
     @DisplayName("JUnit test for createTag method")
     @Test
-    public void createTagTest(){
+    void createTagTest(){
         TagModel tagModel = TagMapper.INSTANCE.tagDtoToTag(tagDtoRequest);
         given(repository.create(tagModel)).willReturn(tagModel);
         TagDtoResponse savedTag = service.create(tagDtoRequest);
@@ -53,7 +53,7 @@ public class TagServiceTest {
 
     @DisplayName("JUnit test for readAllTag method")
     @Test
-    public void getAllTagsTest(){
+    void getAllTagsTest(){
         TagDtoRequest tagDtoRequest1 = new TagDtoRequest
                 .TagDtoRequestBuilder("TestTag_1")
                 .build();
@@ -64,12 +64,12 @@ public class TagServiceTest {
         List<TagDtoResponse> tagList = service.readAll();
 
         assertThat(tagList).isNotNull();
-        assertThat(tagList.size()).isEqualTo(2);
+        assertThat(tagList).hasSize(2);
     }
 
     @DisplayName("JUnit test for getTagById method")
     @Test
-    public void getTagByIdTest(){
+    void getTagByIdTest(){
         TagModel tagModel = TagMapper.INSTANCE.tagDtoToTag(tagDtoRequest);
         given(repository.readById(1L)).willReturn(Optional.of(tagModel));
         TagDtoResponse savedTag = service.readById(tagModel.getId());
@@ -78,7 +78,7 @@ public class TagServiceTest {
 
     @DisplayName("JUnit test for updateTag method")
     @Test
-    public void updateTagTest(){
+    void updateTagTest(){
         tagDtoRequest.setName("UpdateTag");
         TagModel tagModel = TagMapper.INSTANCE.tagDtoToTag(tagDtoRequest);
         given(repository.update(tagModel)).willReturn(tagModel);
@@ -89,7 +89,7 @@ public class TagServiceTest {
 
     @DisplayName("JUnit test for deleteTag method")
     @Test
-    public void deleteTagTest(){
+    void deleteTagTest(){
         given(repository.deleteById(1L)).willReturn(true);
         given(repository.existById(any())).willReturn(true);
         service.deleteById(1L);

@@ -34,8 +34,22 @@ subprojects {
         testImplementation "com.tngtech.archunit:archunit-junit5:$archUnitVersion"
     }
 
+    configurations {
+        testImplementation {
+            exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        }
+    }
+
     test {
         useJUnitPlatform()
+    }
+
+    tasks.withType(JavaCompile) {
+        options.compilerArgs = [
+                "-Xlint:deprecation",
+                "-Xlint:unchecked",
+                "-parameters",
+        ]
     }
 
 }
