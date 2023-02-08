@@ -11,11 +11,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.OneToMany;
 import javax.persistence.FetchType;
 import javax.persistence.CascadeType;
+
+//import jakarta.persistence.*;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,7 +24,6 @@ import java.util.Objects;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Component
 @Scope("prototype")
 @Table(name = "author")
 public class AuthorModel implements BaseEntity<Long> {

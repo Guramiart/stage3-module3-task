@@ -29,11 +29,13 @@ public interface NewsMapper {
 
     default Set<TagModel> map(Set<Long> value) {
         Set<TagModel> tagModels = new HashSet<>();
-        value.forEach(el -> {
-            TagModel tagModel = new TagModel();
-            tagModel.setId(el);
-            tagModels.add(tagModel);
-        });
+        if(value != null) {
+            value.forEach(el -> {
+                TagModel tagModel = new TagModel();
+                tagModel.setId(el);
+                tagModels.add(tagModel);
+            });
+        }
         return tagModels;
     }
 }

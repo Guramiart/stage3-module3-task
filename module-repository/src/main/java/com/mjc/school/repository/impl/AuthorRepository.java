@@ -2,8 +2,9 @@ package com.mjc.school.repository.impl;
 
 import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.repository.model.AuthorModel;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+
+import javax.persistence.*;
+
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,36 +13,47 @@ import java.util.Optional;
 @Repository
 public class AuthorRepository implements BaseRepository<AuthorModel, Long> {
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    @PersistenceUnit
+    private EntityManagerFactory entityManagerFactory;
 
     @Override
     public List<AuthorModel> readAll() {
-        return entityManager.createQuery("SELECT a FROM AuthorModel a", AuthorModel.class).getResultList();
+        EntityManager em = entityManagerFactory.createEntityManager();
+        return em.createQuery("SELECT a FROM AuthorModel a", AuthorModel.class).getResultList();
     }
 
     @Override
     public Optional<AuthorModel> readById(Long id) {
-        return Optional.ofNullable(entityManager.find(AuthorModel.class, id));
+        EntityManager em = entityManagerFactory.createEntityManager();
+        return Optional.ofNullable(em.find(AuthorModel.class, id));
     }
 
     @Override
     public AuthorModel create(AuthorModel entity) {
-        entityManager.persist(entity);
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+        em.persist(entity);
+        em.getTransaction().commit();
         return entity;
     }
 
     @Override
     public AuthorModel update(AuthorModel entity) {
-        AuthorModel model = entityManager.getReference(AuthorModel.class, entity.getId());
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+        AuthorModel model = em.getReference(AuthorModel.class, entity.getId());
         model.setName(entity.getName());
+        em.getTransaction().commit();
         return model;
     }
 
     @Override
     public boolean deleteById(Long id) {
-        Optional<AuthorModel> authorModel = readById(id);
-        authorModel.ifPresent(model -> entityManager.remove(model));
+        EntityManager em = entityManagerFactory.createEntityManager();
+        em.getTransaction().begin();
+        AuthorModel authorModel = em.find(AuthorModel.class, id);
+        em.remove(em.merge(authorModel));
+        em.getTransaction().commit();
         return !existById(id);
     }
 

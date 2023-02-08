@@ -1,6 +1,7 @@
 package com.mjc.school.repository;
 
 import com.mjc.school.repository.model.BaseEntity;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;

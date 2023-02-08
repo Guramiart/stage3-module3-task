@@ -20,18 +20,15 @@ subprojects {
 
     dependencies {
         implementation "org.springframework:spring-context:$springVersion"
-        implementation "org.springframework.boot:spring-boot-starter-aop:$aopVersion"
-        implementation "org.springframework.boot:spring-boot-starter-data-jpa:$jpaVersion"
-        implementation "org.springframework.boot:spring-boot-starter-jdbc:$jdbcVersion"
+        implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.6.6'
         implementation "com.mysql:mysql-connector-j:$connectorVersion"
         implementation 'javax.xml.bind:jaxb-api:2.3.1'
-
 
         testImplementation "org.springframework.boot:spring-boot-starter-test:$jpaTestVersion"
         testImplementation "org.springframework:spring-test:$springVersion"
         testImplementation "org.junit.jupiter:junit-jupiter-api:$jupiterVersion"
-        testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$jupiterVersion"
         testImplementation "com.tngtech.archunit:archunit-junit5:$archUnitVersion"
+        testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$jupiterVersion"
     }
 
     configurations {

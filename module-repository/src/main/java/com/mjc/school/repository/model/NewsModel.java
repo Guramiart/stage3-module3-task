@@ -12,11 +12,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.FetchType;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -24,7 +24,6 @@ import java.util.Set;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Component
 @Scope("prototype")
 @Table(name = "news")
 public class NewsModel implements BaseEntity<Long> {

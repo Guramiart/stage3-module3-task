@@ -4,10 +4,10 @@ import com.mjc.school.menu.Menu;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
-@ComponentScan("com.mjc.school.*")
+@EnableJpaAuditing
 public class Main {
 
     public static void main(String[] args) {
