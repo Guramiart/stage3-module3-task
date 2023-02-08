@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
-//@EntityListeners(AuditingEntityListener.class)
+@EntityListeners(AuditingEntityListener.class)
 @Scope("prototype")
 @Table(name = "author")
 public class AuthorModel implements BaseEntity<Long> {

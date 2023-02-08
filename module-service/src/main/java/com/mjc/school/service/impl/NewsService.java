@@ -5,7 +5,6 @@ import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.repository.model.AuthorModel;
 import com.mjc.school.repository.model.NewsModel;
 import com.mjc.school.repository.impl.NewsRepository;
-import com.mjc.school.repository.model.TagModel;
 
 import com.mjc.school.service.BaseService;
 import com.mjc.school.service.annotation.NotEmpty;
@@ -19,11 +18,9 @@ import com.mjc.school.service.exceptions.ServiceException;
 import com.mjc.school.service.mapper.AuthorMapper;
 import com.mjc.school.service.mapper.NewsMapper;
 import com.mjc.school.service.mapper.TagMapper;
-//import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -34,15 +31,12 @@ public class NewsService implements BaseService<NewsDtoRequest, NewsDtoResponse,
     private static final String AUTHOR_PARAM = "Author";
     private final BaseRepository<NewsModel, Long> newsRepository;
     private final BaseRepository<AuthorModel, Long> authorRepository;
-    private final BaseRepository<TagModel, Long> tagRepository;
 
     @Autowired
     public NewsService(BaseRepository<NewsModel, Long> newsRepository,
-                       BaseRepository<AuthorModel, Long> authorRepository,
-                       BaseRepository<TagModel, Long> tagRepository) {
+                       BaseRepository<AuthorModel, Long> authorRepository) {
         this.newsRepository = newsRepository;
         this.authorRepository = authorRepository;
-        this.tagRepository = tagRepository;
     }
 
     @Override
@@ -66,7 +60,6 @@ public class NewsService implements BaseService<NewsDtoRequest, NewsDtoResponse,
 
     @Override
     @Valid
-    @Transactional
     public NewsDtoResponse create(NewsDtoRequest createRequest) {
         if(authorRepository.existById(createRequest.getAuthorId())) {
             NewsModel newsModel = newsRepository.create(NewsMapper.INSTANCE.newsDtoToNews(createRequest));
@@ -79,7 +72,6 @@ public class NewsService implements BaseService<NewsDtoRequest, NewsDtoResponse,
 
     @Override
     @Valid
-    @Transactional
     public NewsDtoResponse update(NewsDtoRequest updateRequest) {
         if(!newsRepository.existById(updateRequest.getId())) {
             throw new ServiceException(String.format(
@@ -96,7 +88,6 @@ public class NewsService implements BaseService<NewsDtoRequest, NewsDtoResponse,
 
     @Override
     @NotEmpty
-    @Transactional
     public boolean deleteById(Long id) {
         if(!newsRepository.existById(id)) {
             throw new ServiceException(String.format(
