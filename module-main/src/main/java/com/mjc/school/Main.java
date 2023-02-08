@@ -2,12 +2,15 @@ package com.mjc.school;
 
 import com.mjc.school.menu.Menu;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 @SpringBootApplication
-@ComponentScan("com.mjc.school.*")
+@PropertySource(value = "classpath:application.properties")
 public class Main {
 
     public static void main(String[] args) {

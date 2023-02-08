@@ -19,6 +19,7 @@ import com.mjc.school.service.exceptions.ServiceException;
 import com.mjc.school.service.mapper.AuthorMapper;
 import com.mjc.school.service.mapper.NewsMapper;
 import com.mjc.school.service.mapper.TagMapper;
+//import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

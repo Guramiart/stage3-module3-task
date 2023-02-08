@@ -5,14 +5,14 @@ import com.mjc.school.repository.BaseRepository;
 import com.mjc.school.repository.model.AuthorModel;
 import com.mjc.school.repository.model.NewsModel;
 import com.mjc.school.repository.model.TagModel;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+
+import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Predicate;
+
 import org.springframework.stereotype.Repository;
 
 import java.util.Set;
@@ -22,7 +22,6 @@ import java.util.ArrayList;
 
 @Repository
 public class NewsRepository implements BaseRepository<NewsModel, Long> {
-
     @PersistenceContext
     private EntityManager entityManager;
 

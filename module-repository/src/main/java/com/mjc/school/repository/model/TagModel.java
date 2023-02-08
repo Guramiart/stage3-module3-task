@@ -8,14 +8,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.ManyToMany;
 import javax.persistence.FetchType;
+
+//import jakarta.persistence.*;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Component
 @Scope("prototype")
 @Table(name = "tag")
 public class TagModel implements BaseEntity<Long> {
