@@ -4,25 +4,19 @@ import com.mjc.school.repository.BaseRepository;
 
 import com.mjc.school.repository.model.AuthorModel;
 import com.mjc.school.repository.model.NewsModel;
-import com.mjc.school.repository.impl.NewsRepository;
 
 import com.mjc.school.service.BaseService;
 import com.mjc.school.service.annotation.NotEmpty;
 import com.mjc.school.service.annotation.Valid;
-import com.mjc.school.service.dto.impl.AuthorDtoResponse;
 import com.mjc.school.service.dto.impl.NewsDtoRequest;
 import com.mjc.school.service.dto.impl.NewsDtoResponse;
-import com.mjc.school.service.dto.impl.TagDtoResponse;
 import com.mjc.school.service.exceptions.ErrorCode;
 import com.mjc.school.service.exceptions.ServiceException;
-import com.mjc.school.service.mapper.AuthorMapper;
 import com.mjc.school.service.mapper.NewsMapper;
-import com.mjc.school.service.mapper.TagMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class NewsService implements BaseService<NewsDtoRequest, NewsDtoResponse, Long> {
@@ -96,29 +90,4 @@ public class NewsService implements BaseService<NewsDtoRequest, NewsDtoResponse,
         return newsRepository.deleteById(id);
     }
 
-    @NotEmpty
-    public AuthorDtoResponse readAuthorByNewsId(Long id) {
-        AuthorModel authorModel = newsRepository.readById(id).get().getAuthorModel();
-        return AuthorMapper.INSTANCE.authorToAuthorDto(authorModel);
-    }
-
-    @NotEmpty
-    public Set<TagDtoResponse> readTagsByNewsId(Long id) {
-        if(!newsRepository.existById(id)) {
-            throw new ServiceException(String.format(
-                    ErrorCode.NOT_EXIST.getErrorMessage(), NEWS_PARAM, id));
-        }
-        return ((NewsRepository)newsRepository).getTagsByNewsId(id)
-                .stream()
-                .map(TagMapper.INSTANCE::tagToTagDto)
-                .collect(Collectors.toSet());
-    }
-
-    public List<NewsDtoResponse> readNewsByParam(Set<String> names, Set<Long> ids,
-                                                 String author, String title, String content) {
-        return ((NewsRepository) newsRepository).readNewsByParam(names, ids, author, title, content)
-                .stream()
-                .map(NewsMapper.INSTANCE::newsToNewsDto)
-                .collect(Collectors.toList());
-    }
 }
