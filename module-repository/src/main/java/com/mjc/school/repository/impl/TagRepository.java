@@ -43,7 +43,7 @@ public class TagRepository implements BaseRepository<TagModel, Long> {
     public TagModel update(TagModel entity) {
         EntityManager em = entityManagerFactory.createEntityManager();
         em.getTransaction().begin();
-        TagModel tagModel = em.find(TagModel.class, entity.getId());
+        TagModel tagModel = em.getReference(TagModel.class, entity.getId());
         tagModel.setName(entity.getName());
         em.getTransaction().commit();
         return tagModel;
